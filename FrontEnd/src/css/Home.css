@@ -1,0 +1,98 @@
+body {
+  background: linear-gradient(to right, #000000, #2c3e50, #000000);
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.welcome-section,
+.benefits-section,
+.how-it-works-section,
+.getting-started-section,
+.support-section {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+.welcome-section:hover,
+.benefits-section:hover,
+.how-it-works-section:hover,
+.getting-started-section:hover,
+.support-section:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2.25rem;
+  color: white;
+}
+
+ul {
+  padding-left: 1.75rem;
+}
+
+ul li {
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #00bfff;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+
+  .welcome-section,
+  .benefits-section,
+  .how-it-works-section,
+  .getting-started-section,
+  .support-section {
+    padding: 1rem;
+    box-shadow: none;
+    transform: none;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+}

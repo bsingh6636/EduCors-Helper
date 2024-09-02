@@ -1,10 +1,11 @@
 // src/App.js
 import { ToastContainer } from 'react-toastify';
 import './App.css';
-import { Dashboard, Error, Header, SignInAndSignUp, UserHome } from './import'; // Make sure Error404 is the correct component name
+import { Home, Error, Header, SignInAndSignUp, UserHome, DashBoard } from './import'; // Make sure Error404 is the correct component name
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import BrowserRouter as Router
 import "react-toastify/dist/ReactToastify.css";
 import { createContext, useState } from 'react';
+import Help from './components/Help';
 
 export const Context = createContext()
 function App() {
@@ -14,12 +15,14 @@ function App() {
     <Router>
       <Context.Provider value={{ userDetails, setUserDetails, loginState, setLoginState }}>
         <Header />
-        <div className="content">
+        <div className="content bg-gradient-to-r from-black via-gray-800 to-black">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Home />} />
             <Route path="/signIn" element={<SignInAndSignUp />} />
             <Route path="*" element={<Error />} />
-            <Route path='/home' element={<UserHome />} />
+            <Route path='/profile' element={<UserHome />} />
+            <Route path='/help' element={<Help/>}/>
+            <Route path='/dashboard' element={<DashBoard/>}/>
           </Routes>
         </div>
         <ToastContainer position='top-center' />

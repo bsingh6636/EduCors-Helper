@@ -1,38 +1,77 @@
-// src/components/Dashboard.js
-import React from 'react';
+import React from 'react'
+import UserDashBoard from './UserDashBoard';
 
-const Dashboard = () => {
+
+const DashBoard = () => {
+    const mockUser = {
+        username: 'johndoe',
+        email: 'johndoe@example.com',
+        createdAt: '2023-01-01T00:00:00Z',
+      };
+      
+      const mockApiUsage = {
+        totalCalls: 1234,
+        monthlyCalls: [120, 150, 180, 200, 170, 190, 210],
+      };
+      
+      const mockRecentActivity = [
+        'Logged in from IP 192.168.1.1',
+        'Updated profile picture',
+        'Changed password',
+      ];
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div className="bg-white p-4 rounded shadow">
-          <h2 className="text-xl font-semibold mb-2">Overview</h2>
-          <p className="text-gray-700">Get a quick glance at your stats and recent activity.</p>
-        </div>
-        <div className="bg-white p-4 rounded shadow">
-          <h2 className="text-xl font-semibold mb-2">Courses</h2>
-          <p className="text-gray-700">Manage and track your enrolled courses.</p>
-        </div>
-        <div className="bg-white p-4 rounded shadow">
-          <h2 className="text-xl font-semibold mb-2">Assignments</h2>
-          <p className="text-gray-700">View and submit your assignments.</p>
-        </div>
-        <div className="bg-white p-4 rounded shadow">
-          <h2 className="text-xl font-semibold mb-2">Grades</h2>
-          <p className="text-gray-700">Check your grades and performance.</p>
-        </div>
-        <div className="bg-white p-4 rounded shadow">
-          <h2 className="text-xl font-semibold mb-2">Settings</h2>
-          <p className="text-gray-700">Update your profile and application settings.</p>
-        </div>
-        <div className="bg-white p-4 rounded shadow">
-          <h2 className="text-xl font-semibold mb-2">Notifications</h2>
-          <p className="text-gray-700">Manage your notifications and alerts.</p>
-        </div>
-      </div>
-    </div>
-  );
-};
+    <UserDashBoard
+    user={mockUser}
+    apiUsage={mockApiUsage}
+    recentActivity={mockRecentActivity}
+    />
+  )
+}
 
-export default Dashboard;
+export default DashBoard
+
+// // src/components/ApiUsageChart.js
+// import React, { useEffect, useState } from 'react';
+// import { Bar } from 'react-chartjs-2';
+// import axios from 'axios';
+// import Chart from 'chart.js/auto';
+
+// export const ApiUsageChart = ({ userId }) => {
+//     const [data, setData] = useState({ labels: [], datasets: [] });
+
+//     useEffect(() => {
+//         const fetchUsageData = async () => {
+//             try {
+//                 const response = await axios.get(`/api/usage/${userId}`);
+//                 const usageData = response.data;
+
+//                 const labels = usageData.map(entry => entry._id);
+//                 const values = usageData.map(entry => entry.totalCalls);
+
+//                 setData({
+//                     labels,
+//                     datasets: [{
+//                         label: 'API Calls',
+//                         data: values,
+//                         backgroundColor: 'rgba(53, 162, 235, 0.5)',
+//                         borderColor: 'rgba(53, 162, 235, 1)',
+//                         borderWidth: 1,
+//                     }],
+//                 });
+//             } catch (error) {
+//                 console.error('Error fetching API usage data:', error);
+//             }
+//         };
+
+//         fetchUsageData();
+//     }, [userId]);
+
+//     return (
+//         <div>
+//             <h2 className="text-2xl font-semibold text-gray-800 mb-4">API Usage</h2>
+//             <Bar data={data} options={{ responsive: true, plugins: { legend: { position: 'top' } } }} />
+//         </div>
+//     );
+// };
+
+

@@ -3,6 +3,5 @@ export const deletePartobject = (user) =>{
     delete userObject.Password
     delete userObject._id
     delete userObject.updatedAt
-    delete userObject.ApiKey
     return userObject
 }
