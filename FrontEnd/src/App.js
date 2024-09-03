@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Im
 import "react-toastify/dist/ReactToastify.css";
 import { createContext, useState } from 'react';
 import Help from './components/Help';
-import DashBoard from './components/DashBoard';
+import DashBoard from './pages/DashBoard';
 
 export const Context = createContext()
 function App() {
