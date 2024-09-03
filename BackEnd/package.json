@@ -6,6 +6,7 @@
   "scripts": {
     "test": "nodemon index.js",
     "start": "node index.js",
+    "run" : "node index.js" ,
     "dev": "nodemon index.js"
   },
   "keywords": [],
