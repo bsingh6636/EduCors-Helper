@@ -6,8 +6,8 @@ import User from '../models/user.model.js';
 
 export const forwardUrl = asyncErrorHandler(async (req, res) => {
     const { Target } = req.body;
-    console.log(req)
-    console.log((Target))
+    // console.log(req)
+    // console.log((Target))
     // Validate the target URL
     if (!Target || !Target.startsWith('http')) {
         return res.status(400).json({ success: false, message: 'Invalid target URL' });
