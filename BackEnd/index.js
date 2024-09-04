@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGO_SRV, {
 }).catch((err) => {
     console.log(`Error occured while connecting to db : Errror ${err}`)
 })
-
+//cc
 app.listen(PORT, () => {
     console.log(`Server listening on PORT ${PORT}`)
 })
