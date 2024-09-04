@@ -17,5 +17,5 @@ mongoose.connect(process.env.MONGO_SRV, {
 })
 
 app.listen(PORT, () => {
-    console.log(`Server listening on PORT ${PORT}`)
+    console.log(`Server listening on PORTS ${PORT}`)
 })
