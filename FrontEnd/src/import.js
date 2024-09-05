@@ -12,7 +12,7 @@ import Error from './pages/Error';
 import SignInPrompt from './pages/SignInPrompt';
 
 // Import from others
-const BackEndPort = process.env.REACT_APP_BACKEND_SERVER;
+const BackEndPort = process.env.REACT_APP_BACKEND_SERVER_LIVE;
 
 // Export statements
 export { Header, Home, SignInAndSignUp, UserProfile  , UserDashBoard ,  Error, SignInPrompt , BackEndPort };

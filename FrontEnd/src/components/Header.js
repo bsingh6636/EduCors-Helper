@@ -21,20 +21,27 @@ const Header = () => {
 
   useEffect(() => {
     authenticateUser()
-    // async function test() {
-    //   const response = await fetch(`${BackEndPort}/getData`, {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //       ApiKey: "b302cea952ef0f8d",
-    //       Target: "https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.1017167&lng=77.634826600000011"
-    //     })
-    //   })
-    //   const data = response.json;
-    //   console.log(data)
-    // }
-    // test()
-    // eslint-disable-next-line
+    
+    // It's recommended to use environment variables for sensitive information like API keys.
+    const API_KEY = '';
+    const EDUCORS_URL ='https://educorssolver.host/api/getData';
+    const TARGET_URL ='https://api.github.com/users/bsingh6636/repos';
+
+    // Function to get data from the API
+    async function getSwiggyData() {
+      const response = await fetch(EDUCORS_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json' },
+        body: JSON.stringify({ ApiKey: API_KEY, Target: TARGET_URL }),
+      });
+      const data = await response.json();
+      console.log('Data fetched successfully:', data);
+      return data;
+    }
+
+    // Example usage
+    getSwiggyData();
+  
   }, [])
   return (
     <header className="bg-blue-600 text-white p-4">

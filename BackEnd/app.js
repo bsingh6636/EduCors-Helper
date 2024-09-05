@@ -7,15 +7,18 @@ import { FRONTENDURL } from './envHelper.js';
 const app = express()
 
 app.use(cors({
-    origin:FRONTENDURL,
+    origin: FRONTENDURL,
     credentials: true,
-    methods : [ 'GET', 'POST' , 'PATCH' , 'DELETE' ]
+    methods: ['GET', 'POST', 'PATCH', 'DELETE']
 }));
+
 
 app.use(cookieParser())
 
 app.use(express.json())
 
-app.use('/api',userRouter)
+app.use('/api', userRouter)
 
-export default app ;
+app.use('/api/getData', cors({ origin: '*' }))
+
+export default app;
