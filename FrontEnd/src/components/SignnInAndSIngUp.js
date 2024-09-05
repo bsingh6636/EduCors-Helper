@@ -29,6 +29,7 @@ const SignInAndSignUp = () => {
         if (userDetails) {
             navigate('/profile');
         }
+        // eslint-disable-next-line
     }, [userDetails]);
 
     const handleSubmit = async (e) => {
@@ -87,7 +88,7 @@ const SignInAndSignUp = () => {
 
         try {
             if (isSignUp) {
-                const signUp = await fetch(`${BackEndPort}/user/signUp`, {
+                const signUp = await fetch(`${BackEndPort}/signUp`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ Email, UserName, Password, Name }),
@@ -95,14 +96,17 @@ const SignInAndSignUp = () => {
                 });
 
                 const response = await signUp.json();
-                
                 if (response.success) {
                     toast.success(response.message);
+                    toast(response.message);
+                    setUserDetails(response.data)
+                    setLoginState(true)
+                    navigate('/profile');
                 } else {
-                    toast.error(response.error.message);
+                    toast.error(response.message);
                 }
             } else {
-                const signIn = await fetch(`${BackEndPort}/user/SignIn`, {
+                const signIn = await fetch(`${BackEndPort}/SignIn`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
@@ -110,7 +114,6 @@ const SignInAndSignUp = () => {
                 });
 
                 const response = await signIn.json();
-                console.log(response)
                 if (response.success) {
                     toast(response.message);
                     setUserDetails(response.data)
@@ -121,7 +124,8 @@ const SignInAndSignUp = () => {
                 }
             }
         } catch (error) {
-            toast.error('An error occurred.');
+            console.log('error',error)
+            toast.error("error occured",error);
         }
     };
 

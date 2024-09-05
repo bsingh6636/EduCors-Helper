@@ -10,6 +10,7 @@ router.post('/signUp',userSignUp)
 router.get('/auth', Auth)
 router.post('/genApiKey' , generateApiKey)
 router.post('/getData' , VerifyApiKey,forwardUrl)
+// router.post('/getData' , forwardUrl)
 router.get('/signOut', userLogOut)
 
 export default router ;

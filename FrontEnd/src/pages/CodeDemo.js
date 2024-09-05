@@ -1,52 +1,65 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Prism from 'prismjs';
-import 'prismjs/themes/prism-tomorrow.css'; // Choose your preferred Prism theme
-import '../css/CodeDemo.css';
+import 'prismjs/themes/prism-tomorrow.css'; // You can change to your preferred theme
+import '../css/CodeDemo.css'; // Include your custom styles here
 
 const CodeDemo = () => {
   const [isCopied, setIsCopied] = useState(false);
   const codeRef = useRef(null);
 
-  const code =    
-`      fetch('https://api.yourwebsite.com/data', {
-                  headers: {
-                  'Authorization': 'Bearer YOUR_API_KEY'
-                }
-              })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));`;
- 
+  const code = `
+    // It's recommended to use environment variables for sensitive information like API keys.
+    const API_KEY = process.env.API_KEY;
+    const EDUCORS_URL ='https://educorssolver.host/api/getData';
+    const TARGET_URL ='https://api.github.com/users/bsingh6636/repos';
+
+    // Function to get data from the API
+    async function getSwiggyData() {
+      const response = await fetch(EDUCORS_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json' },
+        body: JSON.stringify({ ApiKey: API_KEY, Target: TARGET_URL }),
+      });
+      const data = await response.json();
+      console.log('Data fetched successfully:', data);
+      return data;
+    }
+
+    // Example usage
+    getSwiggyData();
+  `;
+
   useEffect(() => {
     if (codeRef.current) {
-      Prism.highlightElement(codeRef.current);
+      Prism.highlightElement(codeRef.current); // Highlight the code block on render
     }
   }, []);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(code).then(() => {
       setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 2000);
+      setTimeout(() => setIsCopied(false), 2000); // Reset after 2 seconds
     });
   };
 
   return (
-    <div className="code-container  ">
+    <div className="code-demo-container">
       <pre className="code-block">
         <code ref={codeRef} className="language-javascript">
           {code}
         </code>
         <div className="line-numbers">
-          {Array.from({ length: 12 }, (_, i) => (
+          {Array.from({ length: 19}, (_, i) => (
+            //  length: code.split('\n').length 
             <span key={i + 1} className="line">{i + 1}</span>
           ))}
         </div>
       </pre>
       <button onClick={copyToClipboard} className={`copy-btn ${isCopied ? 'copied' : ''}`}>
-        {isCopied ? 'Copied!' : 'Copy'}
+        {isCopied ? 'Copied!' : 'Copy Code'}
       </button>
     </div>
   );
-}
+};
 
 export default CodeDemo;

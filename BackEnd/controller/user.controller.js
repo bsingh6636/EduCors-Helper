@@ -53,15 +53,24 @@ export const userSignUp = asyncErrorHandler(async (req, res) => {
         });
 
         if (existingUser) {
-            return res.status(400).json({ success: false, message: "User already exists, try signing in." });
+            return res.status(400).json({ success: false, message: "User already exists with this Email or UserNmae" });
         }
 
 
-        await User.create({
+       let user = await User.create({
             UserName, Password, Name, Email, Country
         })
+        const payload = { id: user.id }
+        user = deletePartobject(user)
+        const expiresIn = parseInt(process.env.COOKIE_EXPIRES, 10) * 24 * 60 * 60;
 
-        return res.status(201).json({ success: true, message: "User created successfully", });
+        // Generate token
+        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn });
+
+        res.cookie('userToken', token, { httpOnly: true, secure: true, sameSite: 'strict' })
+            
+            user = deletePartobject(user)
+        return res.status(201).json({ success: true, message: "User created successfully", data : user });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ success: false, message: "Error creating user", error });

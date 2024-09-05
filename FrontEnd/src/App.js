@@ -12,7 +12,6 @@ export const Context = createContext()
 function App() {
   const [userDetails, setUserDetails] = useState()
   const [loginState, setLoginState] = useState()
-  let a;
   return (
     <Router>
       <Context.Provider value={{ userDetails, setUserDetails, loginState, setLoginState }}>

@@ -16,6 +16,6 @@ app.use(cookieParser())
 
 app.use(express.json())
 
-app.use('/api/user',userRouter)
+app.use('/api',userRouter)
 
 export default app ;

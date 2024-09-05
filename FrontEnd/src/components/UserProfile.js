@@ -16,7 +16,7 @@ const UserProfile = () => {
     }
 
     try {
-      const response = await fetch(`${BackEndPort}/user/genApiKey`, {
+      const response = await fetch(`${BackEndPort}/genApiKey`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const UserProfile = () => {
 
   async function signOut() {
     try {
-      const response = await fetch(`${BackEndPort}/user/signOut`, {
+      const response = await fetch(`${BackEndPort}/signOut`, {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',

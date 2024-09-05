@@ -1,12 +1,11 @@
 import React from 'react';
 import CodeDemo from '../pages/CodeDemo';
 
-
 const Home = () => {
   return (
     <div className="max-w-7xl mx-auto p-6 flex flex-col space-y-8">
       {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-gray-800 via-gray-900 to-black p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 relative overflow-hidden">
+      <div className="bg-gradient-dark p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
         <img
           src="/images/welcome-bg.svg"
           alt="Background"
@@ -21,7 +20,7 @@ const Home = () => {
       </div>
 
       {/* Benefits Section */}
-      <div className="bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 relative overflow-hidden">
+      <div className="bg-gradient-light p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
         <img
           src="/images/benefits-bg.svg"
           alt="Background"
@@ -39,7 +38,7 @@ const Home = () => {
       </div>
 
       {/* How It Works Section */}
-      <div className="bg-gradient-to-r from-gray-800 via-gray-900 to-black p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 relative overflow-hidden">
+      <div className="bg-gradient-dark p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
         <img
           src="/images/how-it-works-bg.svg"
           alt="Background"
@@ -55,7 +54,7 @@ const Home = () => {
       </div>
 
       {/* Getting Started Section */}
-      <div className="bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 relative overflow-hidden">
+      <div className="bg-gradient-light p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
         <img
           src="/images/getting-started-bg.svg"
           alt="Background"
@@ -73,7 +72,7 @@ const Home = () => {
       </div>
 
       {/* Support & Resources Section */}
-      <div className="bg-gradient-to-r from-gray-800 via-gray-900 to-black p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 relative overflow-hidden">
+      <div className="bg-gradient-dark p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
         <img
           src="/images/support-bg.svg"
           alt="Background"

@@ -8,7 +8,7 @@ const UserSchema =mongoose.Schema({
         required: true,
         unique:[true,'UserName already taken chhose another'],
         minlength: [5, 'UserName must be at least 5 characters long'],
-        maxlength: [10, 'UserName must be at most 10 characters long'],
+        maxlength: [15, 'UserName must be at most 15 characters long'],
     },
     Name: {
         type: String,
@@ -31,6 +31,7 @@ const UserSchema =mongoose.Schema({
         type : String , 
         required : true ,
         minlength: [6, 'Password must be at least 6 characters long'],
+        maxlength: [20, 'Password must be at most 20 characters long'],
     } ,
     ApiKey : {
         type : String ,
