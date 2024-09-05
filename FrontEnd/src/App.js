@@ -1,7 +1,7 @@
 // src/App.js
 import { ToastContainer } from 'react-toastify';
 import './App.css';
-import { Home, Error, Header, SignInAndSignUp, UserHome } from './import'; // Make sure Error404 is the correct component name
+import { Home, Error, Header, SignInAndSignUp, UserProfile } from './import'; // Make sure Error404 is the correct component name
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import BrowserRouter as Router
 import "react-toastify/dist/ReactToastify.css";
 import { createContext, useState } from 'react';
@@ -22,7 +22,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signIn" element={<SignInAndSignUp />} />
             <Route path="*" element={<Error />} />
-            <Route path='/profile' element={<UserHome />} />
+            <Route path='/profile' element={<UserProfile />} />
             <Route path='/help' element={<Help/>}/>
             <Route path='/dashboard' element={<DashBoard/>}/>
           </Routes>

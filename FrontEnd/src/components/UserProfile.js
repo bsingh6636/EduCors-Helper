@@ -4,10 +4,10 @@ import { BackEndPort, SignInPrompt } from '../import';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-const UserHome = () => {
-  const { loginState, userDetails, setLoginState,setUserDetails } = useContext(Context);
+const UserProfile = () => {
+  const { loginState, userDetails, setLoginState, setUserDetails } = useContext(Context);
   const [apiKey, setApiKey] = useState('');
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const generateApiKey = async () => {
     if (!userDetails.UserName) {
@@ -38,19 +38,26 @@ const UserHome = () => {
     }
   };
 
-  async function signOut (){
-      const response = await fetch(`${BackEndPort}/user/signOut`,{
-       
+  async function signOut() {
+    try {
+      const response = await fetch(`${BackEndPort}/user/signOut`, {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
-      })
-      const data = response.json()
-      setUserDetails(null)
-      setLoginState(true)
-      navigate('/signIn');
-
+      });
+      
+      if (response.ok) {
+        setUserDetails(null);
+        setLoginState(true);
+        navigate('/signIn');
+      } else {
+        toast.error('Sign out failed');
+      }
+    } catch (error) {
+      toast.error('An error occurred during sign out');
+      console.error('Error signing out:', error);
+    }
   }
 
   const copyToClipboard = () => {
@@ -61,57 +68,54 @@ const UserHome = () => {
   if (!loginState) return <SignInPrompt />;
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 p-6 flex items-center justify-center">
-      <div className="max-w-3xl w-full bg-white rounded-2xl shadow-2xl p-10">
+    <div className="min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-6 flex items-center justify-center">
+      <div className="max-w-3xl w-full bg-gray-900 text-gray-100 rounded-2xl shadow-2xl p-8 md:p-10">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-4xl font-bold text-gray-900">User Profile</h1>
+          <h1 className="text-4xl font-bold">User Profile</h1>
           <button
-            onClick={()=>signOut()}
-            className="bg-red-500 text-white px-6 py-2 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
+            onClick={signOut}
+            className="bg-red-600 text-white px-6 py-2 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
           >
             Sign Out
           </button>
         </div>
 
-        <div className="mb-8 grid grid-cols-2 gap-6">
+        <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           <Detail label="Username" value={userDetails.UserName} />
           <Detail label="Name" value={userDetails.Name} />
           <Detail label="Email" value={userDetails.Email} />
           <Detail label="Created At" value={new Date(userDetails.createdAt).toLocaleString()} />
         </div>
 
-        
-        {
-          !userDetails.ApiKey && 
-            <div className="flex justify-center mb-10">
-          <button
-            onClick={generateApiKey}
-            className="bg-gradient-to-r from-blue-500 to-teal-500 text-white px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
-          >
-            Generate API Key
-          </button>
-        </div>
-          
-        }
+        {!userDetails.ApiKey && (
+          <div className="flex justify-center mb-10">
+            <button
+              onClick={generateApiKey}
+              className="bg-gradient-to-r from-blue-600 to-teal-600 text-white px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
+            >
+              Generate API Key
+            </button>
+          </div>
+        )}
 
         {userDetails.ApiKey && (
-          <div className="mt-8 bg-gray-100 p-6 rounded-xl shadow-inner">
-            <p className="text-lg font-semibold mb-2 text-gray-800">Your API Key:</p>
+          <div className="mt-8 bg-gray-800 p-6 rounded-xl shadow-inner">
+            <p className="text-lg font-semibold mb-2">Your API Key:</p>
             <div className="flex items-center">
               <input
                 type="text"
                 value={userDetails.ApiKey}
                 readOnly
-                className="flex-grow px-4 py-2 border rounded-lg bg-white text-gray-900"
+                className="flex-grow px-4 py-2 border rounded-lg bg-gray-700 text-gray-100"
               />
               <button
                 onClick={copyToClipboard}
-                className="ml-3 bg-green-500 text-white px-5 py-2 rounded-full hover:bg-green-600 transition-colors duration-300"
+                className="ml-3 bg-green-600 text-white px-5 py-2 rounded-full hover:bg-green-700 transition-colors duration-300"
               >
                 Copy
               </button>
             </div>
-            <p className="text-sm text-red-600 mt-3">
+            <p className="text-sm text-red-400 mt-3">
               * Keep your API key secure. Do not share it with others.
             </p>
           </div>
@@ -127,17 +131,17 @@ const UserHome = () => {
 };
 
 const Detail = ({ label, value }) => (
-  <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
-    <p className="text-sm font-semibold text-gray-600">{label}</p>
-    <p className="text-lg font-medium text-gray-800">{value}</p>
+  <div className="bg-gray-800 p-4 rounded-lg shadow-sm">
+    <p className="text-sm font-semibold text-gray-400">{label}</p>
+    <p className="text-lg font-medium text-gray-100">{value}</p>
   </div>
 );
 
 const Notice = ({ title, message }) => (
-  <div className="mt-10 p-6 bg-yellow-100 border border-yellow-300 rounded-lg shadow-sm">
-    <h2 className="text-2xl font-bold text-yellow-700 mb-2">{title}</h2>
-    <p className="text-sm text-yellow-700">{message}</p>
+  <div className="mt-10 p-6 bg-gray-700 border border-gray-600 rounded-lg shadow-sm">
+    <h2 className="text-2xl font-bold text-gray-300 mb-2">{title}</h2>
+    <p className="text-sm text-gray-300">{message}</p>
   </div>
 );
 
-export default UserHome;
+export default UserProfile;

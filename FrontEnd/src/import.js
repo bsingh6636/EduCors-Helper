@@ -2,7 +2,7 @@
 import Header from './components/Header';
 import Home from './components/Home'; 
 import SignInAndSignUp from './components/SignnInAndSIngUp'; 
-import UserHome from './components/UserHome';
+import UserProfile from './components/UserProfile';
 // import DashBoard from './components/DashBoard';
 import UserDashBoard from './components/UserDashBoard';
 
@@ -15,4 +15,4 @@ import SignInPrompt from './pages/SignInPrompt';
 const BackEndPort = process.env.REACT_APP_BACKEND_SERVER;
 
 // Export statements
-export { Header, Home, SignInAndSignUp, UserHome  , UserDashBoard ,  Error, SignInPrompt , BackEndPort };
+export { Header, Home, SignInAndSignUp, UserProfile  , UserDashBoard ,  Error, SignInPrompt , BackEndPort };
