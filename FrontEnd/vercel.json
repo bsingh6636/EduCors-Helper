@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      {
+        "source": "/api/(.*)",
+        "destination": "https://api-service-backennd.vercel.app/api/api/$1"
+      }
+    ]
+  }
+  
