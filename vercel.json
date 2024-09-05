@@ -9,18 +9,18 @@
         }
       },
       {
-        "src": "BackEnd/index.js",
-        "use": "@vercel/node"
+        "src": "BackEnd/index.js",      
+        "use": "@vercel/node"         
       }
     ],
     "routes": [
       {
-        "src": "/api/(.*)",
-        "dest": "/BackEnd/index.js"
+        "src": "/api/(.*)",             
+        "dest": "/BackEnd/index.js"     
       },
       {
-        "src": "/(.*)",
-        "dest": "/FrontEnd/$1"
+        "src": "/(.*)",                
+        "dest": "/FrontEnd/$1"          
       }
     ]
   }
