@@ -22,31 +22,9 @@ const Header = () => {
   }
 
   useEffect(() => {
-    authenticateUser()
-
-    // It's recommended to use environment variables for sensitive information like API keys.
-    // const API_KEY = '';
-    // const EDUCORS_URL = 'https://educorssolver.host/api/getData';
-    // const TARGET_URL = 'https://api.github.com/users/bsingh6636/repos';
-
-    // // Function to get data from the API
-    // async function getSwiggyData() {
-    //   const response = await fetch(EDUCORS_URL, {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ ApiKey: API_KEY, Target: TARGET_URL }),
-    //   });
-    //   const data = await response.json();
-    //   console.log('Data fetched successfully:', data);
-    //   return data;
-    // }
     
     // It's recommended to use environment variables for sensitive information like API keys.
-   
-    // It's recommended to use environment variables for sensitive information like API keys.
-    
-    // It's recommended to use environment variables for sensitive information like API keys.
-    const API_KEY = 'f21aac0985753059';
+    const API_KEY = '310ecb8f2154245c';
     const EDUCORS_URL ='https://educorssolver.host/api/getData';
     const TARGET_URL ='https://api.github.com/users/bsingh6636/repos';
 
@@ -62,9 +40,10 @@ const Header = () => {
       return data;
     }
 
+    // Example usage
     githubUserData();
   
-
+    authenticateUser()
   }, [])
   return (
     <>

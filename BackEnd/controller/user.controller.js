@@ -108,7 +108,6 @@ export const generateApiKey = asyncErrorHandler(async (req, res, next) => {
             { ApiKey },
             { new: true, runValidators: true }
         );
-        console.log('updatedUser',updatedUser)
 
         return res.json({ success: true, message:'Api Key Generated', data: updatedUser.ApiKey });
     } catch (error) {
