@@ -1,12 +1,12 @@
 // src/components/Header.js
 import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BackEndPort } from '../import';
 import { Context } from '../App';
 
 const Header = () => {
-  const { setUserDetails, setLoginState } = useContext(Context)
-
+const { setUserDetails, setLoginState } = useContext(Context)
+const navigate = useNavigate()
 
   async function authenticateUser() {
     const response = await fetch(`${BackEndPort}/auth`, {
@@ -45,6 +45,10 @@ const Header = () => {
 
     authenticateUser()
   }, [])
+
+  function onclicks (){
+    navigate('/signIn')
+  }
   return (
     <>
       <header className=" text-white flex justify-evenly mt-10">
@@ -61,8 +65,10 @@ const Header = () => {
           </nav>
         </div>
         <div>
-          <button className='mx-3  p-1 rounded-lg bg-white text-black border-[3px] border-red-600 hover:border-blue-700'>SignIn</button>
-          <button className='mx-3  p-1 rounded-lg bg-blue-700 text-white border-[3px] border-red-600 hover:border-white'>SignUp</button>
+          <button className='mx-3  p-1 rounded-lg bg-white text-black border-[2px] border-red-600 hover:border-blue-700'
+           onClick={()=>onclicks()}>SignIn</button>
+          <button className='mx-3  p-1 rounded-lg bg-blue-700 text-white border-[2px] border-red-600 hover:border-white'
+           onClick={()=>onclicks()}>SignUp</button>
         </div>
 
       </header>

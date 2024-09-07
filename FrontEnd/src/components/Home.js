@@ -2,6 +2,7 @@ import React from 'react';
 import CodeDemo from '../pages/CodeDemo';
 import { FaCloudUploadAlt , FaLock } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
+import FAQComponent from '../pages/FAQComponent';
 const Home = () => {
   return (
     <>
@@ -23,6 +24,8 @@ const Home = () => {
           </div>
           <Home2/>
           <Home3/>
+          <FAQComponent/>
+          <Home4/>
         </div>
       </div>
       <Homee />
@@ -115,6 +118,60 @@ const Home3 = () => {
     </div>
   );
 };
+
+const Home4 = () =>{
+  return (
+    <div className="bg-black text-white py-16 px-8">
+      <div className="max-w-4xl mx-auto text-center">
+        <h1 className="text-4xl font-bold mb-4">Unlock the Power of APIs</h1>
+        <p className="text-lg mb-12">
+          Effortlessly integrate our secure APIs and enhance your application's capabilities while avoiding CORS issues.
+        </p>
+      </div>
+
+      <div className="max-w-4xl mx-auto flex flex-col space-y-12">
+        <div className="flex items-start space-x-4">
+          <div className="bg-gray-800 p-4 rounded-full">
+            {/* Icon for Get Your API Key */}
+            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2a10 10 0 00-5 18.71V22h10v-1.29A10 10 0 0012 2zm-4 10a4 4 0 118 0 4 4 0 01-8 0zm10 6h-2v-1.26a6 6 0 10-8 0V18H6a8 8 0 1116 0z" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-xl font-bold">Get Your API Key</h2>
+            <p>Sign up and get your unique API key to start integrating with ease and security.</p>
+          </div>
+        </div>
+
+        <div className="flex items-start space-x-4">
+          <div className="bg-gray-800 p-4 rounded-full">
+            {/* Icon for Integrate Seamlessly */}
+            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2a10 10 0 00-10 10 9.98 9.98 0 004.25 8.25L12 22l5.75-1.75A10 10 0 0022 12a10 10 0 00-10-10zm0 18.25L9.2 19h-.55a7.94 7.94 0 01-3.86-1.02L6 14.3l6-3.3 6 3.3-1.79 3.68c-1.3.65-2.74 1.03-4.21 1.06zm4.66-5.62a4 4 0 11-5.66 0 4 4 0 015.66 0z" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-xl font-bold">Integrate Seamlessly</h2>
+            <p>Follow our straightforward guides to integrate our APIs into your application without hassle.</p>
+          </div>
+        </div>
+
+        <div className="flex items-start space-x-4">
+          <div className="bg-gray-800 p-4 rounded-full">
+            {/* Icon for Go Live */}
+            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm5.67 5.67l-1.42 1.42A5.98 5.98 0 0112 18v-2a4 4 0 10-3.17-7l1.42-1.42a6 6 0 015.42 0z" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-xl font-bold">Go Live</h2>
+            <p>Launch your application with confidence, backed by our secure and efficient API services.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
 
