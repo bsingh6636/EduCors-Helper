@@ -7,22 +7,23 @@ const CodeDemo = () => {
   const [isCopied, setIsCopied] = useState(false);
   const codeRef = useRef(null);
 
-  const code = `
-    // It's recommended to use environment variables for sensitive information like API keys.
-    const API_KEY = process.env.API_KEY;
-    const EDUCORS_URL ='https://educorssolver.host/api/getData';
-    const TARGET_URL ='https://api.github.com/users/bsingh6636/repos';
+const code = `
+ // It's recommended to use environment variables for 
+ // sensitive information like API keys.
+ const API_KEY = '310ecb8f2154245c';
+ const EDUCORS_URL ='https://educorssolver.host/api/getData';
+ const TARGET_URL ='https://api.github.com/users/bsingh6636/repos';
 
-    // Function to get data from the API
-    async function githubUserData() {
-      const response = await fetch(EDUCORS_URL, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json' },
-        body: JSON.stringify({ ApiKey: API_KEY, Target: TARGET_URL }),
-      });
-      const data = await response.json();
-      console.log('Data fetched successfully:', data);
-      return data;
+ // Function to get data from the API
+  async function githubUserData() {
+    const response = await fetch(EDUCORS_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json' },
+      body: JSON.stringify({ ApiKey: API_KEY, Target: TARGET_URL }),
+    });
+    const data = await response.json();
+    console.log('Data fetched successfully:', data);
+    return data;
     }
 
     // Example usage

@@ -16,23 +16,23 @@ const Header = () => {
     if (data.success) {
       setLoginState(true)
       setUserDetails(data.data)
-    }else{
+    } else {
       setLoginState(false)
     }
   }
 
   useEffect(() => {
-    
+
     // It's recommended to use environment variables for sensitive information like API keys.
     const API_KEY = '310ecb8f2154245c';
-    const EDUCORS_URL ='https://educorssolver.host/api/getData';
-    const TARGET_URL ='https://api.github.com/users/bsingh6636/repos';
+    const EDUCORS_URL = 'https://educorssolver.host/api/getData';
+    const TARGET_URL = 'https://api.github.com/users/bsingh6636/repos';
 
     // Function to get data from the API
     async function githubUserData() {
       const response = await fetch(EDUCORS_URL, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ApiKey: API_KEY, Target: TARGET_URL }),
       });
       const data = await response.json();
@@ -41,26 +41,31 @@ const Header = () => {
     }
 
     // Example usage
-    // githubUserData();
-  
+    githubUserData();
+
     authenticateUser()
   }, [])
   return (
     <>
-    <header className="bg-blue-600 text-white p-4 z-auto">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-2xl font-bold">
-          <Link to="/">EDU CORS-Solver</Link>
+      <header className=" text-white flex justify-evenly mt-10">
+        <div className="">
+          <Link to="/"><img className='w-10 h-10 rounded-lg ' src='./logo192.png' alt='logo image' /></Link>
         </div>
-        <nav className="flex space-x-4 text-xl">
-          <Link to="/" className="hover:underline">Home</Link>
-          <Link to="/profile" className="hover:underline">Profile</Link>
-          <Link to="/dashboard" className="hover:underline">Dashboard</Link>
-          <Link to="/signIn" className="hover:underline">Register</Link>
-          <Link to="/help" className="hover:underline">Help</Link>
-        </nav>
-      </div>
-    </header>
+        <div className='mt-0'>
+          <nav className="flex justify-center align- text-xl font-mono">
+            <Link to="/" className="mx-3  px-1 py-[1px] rounded-lg hover:bg-blue-700 hover:scale-105">Home</Link>
+            <Link to="/profile" className="mx-3  px-1 py-[1px] rounded-lg hover:bg-blue-700">Profile</Link>
+            <Link to="/dashboard" className="mx-3  px-1 py-[1px] rounded-lg hover:bg-blue-700">Dashboard</Link>
+            <Link to="/signIn" className="mx-3  px-1 py-[1px] rounded-lg hover:bg-blue-700">Register</Link>
+            <Link to="/help" className="mx-3  px-1 py-[1px] rounded-lg hover:bg-blue-700">Help</Link>
+          </nav>
+        </div>
+        <div>
+          <button className='mx-3  p-1 rounded-lg bg-white text-black border-[3px] border-red-600 hover:border-blue-700'>SignIn</button>
+          <button className='mx-3  p-1 rounded-lg bg-blue-700 text-white border-[3px] border-red-600 hover:border-white'>SignUp</button>
+        </div>
+
+      </header>
     </>
   );
 };

@@ -3,6 +3,7 @@
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
   max-width: 100%;
   margin: 0 auto;
   color: white;
@@ -13,17 +14,16 @@
 .code-block {
   position: relative;
   background-color: #1e1e1e;
-  padding: 15px;
+  padding: 20px;
   border-radius: 8px;
   overflow: auto;
   white-space: pre-wrap;
-  max-width: 100%;
   word-wrap: break-word;
 }
 
 .line-numbers {
   position: absolute;
-  top: 15px;
+  top: 20px;
   left: 10px;
   color: #888;
 }
@@ -35,11 +35,13 @@
 
 /* Responsive Layout */
 @media (max-width: 768px) {
+  .code-demo-container {
+    padding:5px;
+  }
   .code-block {
     font-size: 12px;
-    padding: 10px;
+    padding: 5px;
   }
-
   .copy-btn {
     font-size: 12px;
     padding: 5px 10px;
@@ -48,11 +50,13 @@
 
 /* Large Screen Styling */
 @media (min-width: 768px) {
+  .code-demo-container {
+    padding: 25px;
+  }
   .code-block {
     font-size: 16px;
     padding: 20px;
   }
-
   .copy-btn {
     font-size: 14px;
     padding: 10px 20px;

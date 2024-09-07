@@ -16,7 +16,8 @@ function App() {
     <Router>
       <Context.Provider value={{ userDetails, setUserDetails, loginState, setLoginState }}>
         <Header />
-        <div className="content bg-gradient-to-r from-black via-gray-800 to-black">
+        <div className="bg-black font-mono">
+        {/* content bg-gradient-to-r from-black via-gray-800 to-black */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signIn" element={<SignInAndSignUp />} />
@@ -26,7 +27,7 @@ function App() {
             <Route path='/dashboard' element={<DashBoard/>}/>
           </Routes>
         </div>
-        <ToastContainer position='top-center' />
+        <ToastContainer position='top-center'  />
         <Footer/>
      
       </Context.Provider>
