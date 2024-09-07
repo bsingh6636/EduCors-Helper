@@ -19,6 +19,6 @@ app.use(express.json())
 
 app.use('/api', userRouter)
 
-app.use('/api/getData', cors({ origin: '*' }))
+app.use('/api/getData', cors({ origin: '*' , credentials: true, methods: [ 'POST' ] }))
 
 export default app;

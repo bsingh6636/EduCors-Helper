@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Prism from 'prismjs';
-import 'prismjs/themes/prism-tomorrow.css'; // You can change to your preferred theme
-import '../css/CodeDemo.css'; // Include your custom styles here
+import 'prismjs/themes/prism-tomorrow.css'; 
+import '../css/CodeDemo.css';
 
 const CodeDemo = () => {
   const [isCopied, setIsCopied] = useState(false);
@@ -14,7 +14,7 @@ const CodeDemo = () => {
     const TARGET_URL ='https://api.github.com/users/bsingh6636/repos';
 
     // Function to get data from the API
-    async function getSwiggyData() {
+    async function githubUserData() {
       const response = await fetch(EDUCORS_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json' },
@@ -26,7 +26,7 @@ const CodeDemo = () => {
     }
 
     // Example usage
-    getSwiggyData();
+    githubUserData();
   `;
 
   useEffect(() => {

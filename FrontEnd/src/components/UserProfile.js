@@ -3,6 +3,7 @@ import { Context } from '../App';
 import { BackEndPort, SignInPrompt } from '../import';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import ProfileShimmer from '../shimmer/ProfileShimmer';
 
 const UserProfile = () => {
   const { loginState, userDetails, setLoginState, setUserDetails } = useContext(Context);
@@ -30,6 +31,7 @@ const UserProfile = () => {
       }
 
       const data = await response.json();
+      userDetails.ApiKey=data.data
       setApiKey(data.data);
       toast.success(data.message);
     } catch (error) {
@@ -65,9 +67,9 @@ const UserProfile = () => {
     toast.info('API key copied to clipboard!');
   };
 
-  if (!loginState) return <SignInPrompt />;
+  if(loginState==undefined) return <ProfileShimmer/>;
 
-  return (
+  return !loginState ? <SignInPrompt /> :  (
     <div className="min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-6 flex items-center justify-center">
       <div className="max-w-3xl w-full bg-gray-900 text-gray-100 rounded-2xl shadow-2xl p-8 md:p-10">
         <div className="flex justify-between items-center mb-6">
@@ -86,7 +88,7 @@ const UserProfile = () => {
           <Detail label="Email" value={userDetails.Email} />
           <Detail label="Created At" value={new Date(userDetails.createdAt).toLocaleString()} />
         </div>
-
+        {console.log(userDetails)}
         {!userDetails.ApiKey && (
           <div className="flex justify-center mb-10">
             <button

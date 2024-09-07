@@ -5,8 +5,9 @@ import { BackEndPort } from '../import';
 import { Context } from '../App';
 
 const Header = () => {
-
   const { setUserDetails, setLoginState } = useContext(Context)
+
+
   async function authenticateUser() {
     const response = await fetch(`${BackEndPort}/auth`, {
       credentials: 'include'
@@ -15,20 +16,40 @@ const Header = () => {
     if (data.success) {
       setLoginState(true)
       setUserDetails(data.data)
-
+    }else{
+      setLoginState(false)
     }
   }
 
   useEffect(() => {
     authenticateUser()
+
+    // It's recommended to use environment variables for sensitive information like API keys.
+    // const API_KEY = '';
+    // const EDUCORS_URL = 'https://educorssolver.host/api/getData';
+    // const TARGET_URL = 'https://api.github.com/users/bsingh6636/repos';
+
+    // // Function to get data from the API
+    // async function getSwiggyData() {
+    //   const response = await fetch(EDUCORS_URL, {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ ApiKey: API_KEY, Target: TARGET_URL }),
+    //   });
+    //   const data = await response.json();
+    //   console.log('Data fetched successfully:', data);
+    //   return data;
+    // }
     
     // It's recommended to use environment variables for sensitive information like API keys.
-    const API_KEY = '';
+   
+    // It's recommended to use environment variables for sensitive information like API keys.
+    const API_KEY = "15d8e4bebb7e58db";
     const EDUCORS_URL ='https://educorssolver.host/api/getData';
     const TARGET_URL ='https://api.github.com/users/bsingh6636/repos';
 
     // Function to get data from the API
-    async function getSwiggyData() {
+    async function githubUserData() {
       const response = await fetch(EDUCORS_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json' },
@@ -40,11 +61,17 @@ const Header = () => {
     }
 
     // Example usage
-    getSwiggyData();
+    githubUserData();
   
+  
+
+    // Example usage
+    // getSwiggyData();
+
   }, [])
   return (
-    <header className="bg-blue-600 text-white p-4">
+    <>
+    <header className="bg-blue-600 text-white p-4 z-auto">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
           <Link to="/">EDU CORS-Solver</Link>
@@ -58,6 +85,7 @@ const Header = () => {
         </nav>
       </div>
     </header>
+    </>
   );
 };
 
