@@ -61,7 +61,7 @@ const Header = () => {
     }
 
     // Example usage
-    githubUserData();
+    // githubUserData();
   
   
 
