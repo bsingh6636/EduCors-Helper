@@ -2,21 +2,26 @@ import express from 'express'
 import userRouter from './router/user.router.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
-import { FRONTENDURL } from './envHelper.js';
+import { DEVELOPMENT_MODE, FRONTENDURL } from './envHelper.js';
 
 const app = express()
 
-// app.use(cors({
-//     origin: '*',
-//     credentials: true,
-//     methods: ['GET', 'POST', 'PATCH', 'DELETE']
-// }));
 
-app.use(cors({
+if(DEVELOPMENT_MODE=='LOCAL'){
+    app.use(cors({
     origin: FRONTENDURL,
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE']
 }));
+}else{
+    app.use(cors({
+        origin: '*',
+        credentials: true,
+        methods: ['GET', 'POST', 'PATCH', 'DELETE']
+    }));
+}
+
+
 
 
 app.use(cookieParser())
