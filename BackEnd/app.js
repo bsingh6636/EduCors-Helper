@@ -7,19 +7,19 @@ import { DEVELOPMENT_MODE, FRONTENDURL } from './envHelper.js';
 const app = express()
 
 
-if(DEVELOPMENT_MODE=='LOCAL'){
-    app.use(cors({
-    origin: FRONTENDURL,
-    credentials: true,
-    methods: ['GET', 'POST', 'PATCH', 'DELETE']
-}));
-}else{
-    app.use(cors({
-        origin: '*',
-        credentials: true,
-        methods: ['GET', 'POST', 'PATCH', 'DELETE']
-    }));
-}
+// if(DEVELOPMENT_MODE=='LOCAL'){
+//     app.use(cors({
+//     origin: FRONTENDURL,
+//     credentials: true,
+//     methods: ['GET', 'POST', 'PATCH', 'DELETE']
+// }));
+// }else{
+//     app.use(cors({
+//         origin: '*',
+//         credentials: true,
+//         methods: ['GET', 'POST', 'PATCH', 'DELETE']
+//     }));
+// }
 
 
 
