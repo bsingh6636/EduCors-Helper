@@ -7,7 +7,7 @@ import { FRONTENDURL } from './envHelper.js';
 const app = express()
 
 app.use(cors({
-    origin: FRONTENDURL,
+    origin: '*',
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE']
 }));

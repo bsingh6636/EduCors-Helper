@@ -44,7 +44,9 @@ const Header = () => {
     // It's recommended to use environment variables for sensitive information like API keys.
    
     // It's recommended to use environment variables for sensitive information like API keys.
-    const API_KEY = "15d8e4bebb7e58db";
+    
+    // It's recommended to use environment variables for sensitive information like API keys.
+    const API_KEY = 'f21aac0985753059';
     const EDUCORS_URL ='https://educorssolver.host/api/getData';
     const TARGET_URL ='https://api.github.com/users/bsingh6636/repos';
 
@@ -60,13 +62,8 @@ const Header = () => {
       return data;
     }
 
-    // Example usage
-    // githubUserData();
+    githubUserData();
   
-  
-
-    // Example usage
-    // getSwiggyData();
 
   }, [])
   return (

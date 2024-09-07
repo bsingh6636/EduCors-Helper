@@ -88,7 +88,6 @@ const UserProfile = () => {
           <Detail label="Email" value={userDetails.Email} />
           <Detail label="Created At" value={new Date(userDetails.createdAt).toLocaleString()} />
         </div>
-        {console.log(userDetails)}
         {!userDetails.ApiKey && (
           <div className="flex justify-center mb-10">
             <button
