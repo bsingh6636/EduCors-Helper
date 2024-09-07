@@ -21,6 +21,24 @@ const app = express()
 //     }));
 // }
 
+const corsOtions = {
+    origin: (origin, callback) => {
+        if (DEVELOPMENT_MODE === 'LOCAL') {
+            console.log(DEVELOPMENT_MODE)
+            callback(null, FRONTENDURL);
+        } else {
+            console.log(DEVELOPMENT_MODE);
+            callback(null, '*')
+        }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', ' PATCH', 'DELETE'],
+    allowedHeaders: ['Contenet-Type', 'Authorization']
+}
+app.use(cors(corsOtions));
+
+// app.options('*',cors(corsOtions))
+
 
 
 
