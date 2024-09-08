@@ -1,9 +1,12 @@
 {
-    "rewrites": [
-      {
-        "source": "/api/(.*)",
-        "destination": "https://api-service-backennd.vercel.app/api/$1"
-      }
-    ]
-  }
-  
+  "rewrites": [
+    {
+      "source": "/api/getData",
+      "destination": "https://cors-prod2.vercel.app/api/getData"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "https://api-service-backennd.vercel.app/api/$1"
+    }
+  ]
+}
