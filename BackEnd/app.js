@@ -6,25 +6,33 @@ import { DEVELOPMENT_MODE, FRONTENDURL } from './envHelper.js';
 
 const app = express();
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (DEVELOPMENT_MODE === 'LOCAL') {
-      console.log(DEVELOPMENT_MODE);
-      callback(null, FRONTENDURL);
-    } else {
-      console.log(DEVELOPMENT_MODE);
-      callback(null, '*');
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-};
+// const corsOptions = {
+//     origin: (origin, callback) => {
+//         if (DEVELOPMENT_MODE === 'LOCAL') {
+//             console.log(DEVELOPMENT_MODE);
+//             callback(null, FRONTENDURL);
+//         } else {
+//             callback(null, '*');
+//         }
+//     },
+//     credentials: true,
+//     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+// };
 
-app.use(cors(corsOptions));
+app.use(cors(
+    {
+        origin: '*',
+        credentials: true,
+        methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+    }
+))
+
+// app.use(cors(corsOptions));
 
 // Handles preflight requests for all routes
-app.options('*', cors(corsOptions));
+// app.options('*', cors(corsOptions));
 
 app.use(cookieParser());
 app.use(express.json());
