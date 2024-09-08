@@ -31,7 +31,7 @@ const UserProfile = () => {
       }
 
       const data = await response.json();
-      userDetails.ApiKey=data.data
+      userDetails.ApiKey = data.data
       setApiKey(data.data);
       toast.success(data.message);
     } catch (error) {
@@ -48,7 +48,7 @@ const UserProfile = () => {
           'Content-Type': 'application/json',
         },
       });
-      
+
       if (response.ok) {
         setUserDetails(null);
         setLoginState(true);
@@ -67,9 +67,9 @@ const UserProfile = () => {
     toast.info('API key copied to clipboard!');
   };
 
-  if(loginState==undefined) return <ProfileShimmer/>;
+  if (loginState === undefined) return <ProfileShimmer />;
 
-  return !loginState ? <SignInPrompt /> :  (
+  return !loginState ? <SignInPrompt /> : (
     <div className="min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-6 flex items-center justify-center">
       <div className="max-w-3xl w-full bg-gray-900 text-gray-100 rounded-2xl shadow-2xl p-8 md:p-10">
         <div className="flex justify-between items-center mb-6">

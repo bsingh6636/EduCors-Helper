@@ -1,17 +1,23 @@
-export const deletePartobject = (user) =>{
-    
-    if(typeof(user)=='object'){
-        const userObject = user
-        delete userObject.Password
-        delete userObject._id
-        delete userObject.updatedAt
-        return userObject
+export const deletePartobject = (user) => {
+    let userObject;
+
+    if (typeof user === 'object' && user !== null) {
+        // Check if user has toObject() method (likely a Mongoose document)
+        if (typeof user.toObject === 'function') {
+            userObject = user.toObject();
+        } else {
+            userObject = { ...user }; // Clone the object to avoid mutating the original
+        }
+    } else {
+        console.log('Input is not an object');
+        return null; // Return null or handle as needed
     }
-   else{
-    const userObject = user.toObject()
-    delete userObject.Password
-    delete userObject._id
-    delete userObject.updatedAt
-    return userObject
-   }
-}
+
+    // Delete specified properties if they exist
+    delete userObject.Password;
+    delete userObject.updatedAt;
+
+    // Log to verify if properties are deleted
+
+    return userObject;
+};

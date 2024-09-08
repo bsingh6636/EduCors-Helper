@@ -13,6 +13,7 @@ const apiUsageSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
+    totalApiCalls: { type: Number, default: 0 },
     usageRecords: [usageRecordSchema], // Array to store usage records
 });
 

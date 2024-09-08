@@ -24,26 +24,27 @@ const navigate = useNavigate()
   useEffect(() => {
 
     // It's recommended to use environment variables for sensitive information like API keys.
-    const API_KEY = '310ecb8f2154245c';
-    const EDUCORS_URL = 'https://educorssolver.host/api/getData';
-    const TARGET_URL = 'https://api.github.com/users/bsingh6636/repos';
+    // const API_KEY = '310ecb8f2154245c';
+    // const EDUCORS_URL = 'http://localhost:3001/api/getData';
+    // const TARGET_URL = 'https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.1017167&lng=77.634826600000011';
 
-    // Function to get data from the API
-    async function githubUserData() {
-      const response = await fetch(EDUCORS_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ApiKey: API_KEY, Target: TARGET_URL }),
-      });
-      const data = await response.json();
-      console.log('Data fetched successfully:', data);
-      return data;
-    }
+    // // Function to get data from the API
+    // async function githubUserData() {
+    //   const response = await fetch(EDUCORS_URL, {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ ApiKey: API_KEY, Target: TARGET_URL }),
+    //   });
+    //   const data = await response.json();
+    //   console.log('Data fetched successfully:', data);
+    //   return data;
+    // }
 
     // Example usage
-    githubUserData();
+    // githubUserData();
 
     authenticateUser()
+    // eslint-disable-next-line
   }, [])
 
   function onclicks (){
@@ -51,9 +52,9 @@ const navigate = useNavigate()
   }
   return (
     <>
-      <header className=" text-white flex justify-evenly mt-10">
+      <header className=" text-white flex justify-evenly mt-10 mb-10">
         <div className="">
-          <Link to="/"><img className='w-10 h-10 rounded-lg ' src='./logo192.png' alt='logo image' /></Link>
+          <Link to="/"><img className='w-10 h-10 rounded-lg ' src='./logo192.png' alt='logo' /></Link>
         </div>
         <div className='mt-0'>
           <nav className="flex justify-center align- text-xl font-mono">

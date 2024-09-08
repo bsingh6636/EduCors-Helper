@@ -1,10 +1,9 @@
 import axios from 'axios';
-import ApiUsage from '../models/apiUsage.schema.js';
-import { asyncErrorHandler } from '../utils/asyncErrorHandler.js';
+import { asyncErrorHandler } from './utils/asyncErrorHandler.js';
 import moment from 'moment';
-import User from '../models/user.model.js';
+import User from './models/user.model.js';
 import mongoose from 'mongoose';
-
+import ApiUsage from './models/apiUsage.schema.js'
 // https://educorssolver.host/api/user/getData
 export const forwardUrl = asyncErrorHandler(async (req, res) => {
     const { Target } = req.body;
@@ -44,7 +43,7 @@ export const VerifyApiKey = asyncErrorHandler(async (req, res, next) => {
         const endpoint = req.originalUrl;
         const todayStart = moment().startOf('day').toDate();
         const currentTime = new Date();
-
+        
         // Find or create API usage record
         let apiUsage = await ApiUsage.findOne({ UserName: user._id });
 

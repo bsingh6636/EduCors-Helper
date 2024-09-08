@@ -1,16 +1,13 @@
 import express from 'express';
-import userRouter from './router/user.router.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { DEVELOPMENT_MODE, FRONTENDURL } from './envHelper.js';
+import { forwardUrl, VerifyApiKey } from './forward.controller.js';
 
 const app = express();
-const bcd = 'https://preview-new.playcode.io'
-const local1 = 'http://localhost:3001/'
-const local2='http://localhost:3000/'
+
 
 app.use(cors({
-    origin : [FRONTENDURL,bcd ,local1 , local2],
+    origin : '*' ,
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -20,6 +17,6 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
-app.use('/api', userRouter);
+app.post('/api/getData', VerifyApiKey , forwardUrl);
 
 export default app;
