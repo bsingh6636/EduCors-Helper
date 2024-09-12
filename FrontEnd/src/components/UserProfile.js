@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Context } from '../App';
-import { BackEndPort, SignInPrompt } from '../import';
+import { BackEndPort, BarChart, SignInPrompt } from '../import';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import ProfileShimmer from '../shimmer/ProfileShimmer';
@@ -9,6 +9,7 @@ const UserProfile = () => {
   const { loginState, userDetails, setLoginState, setUserDetails } = useContext(Context);
   const [apiKey, setApiKey] = useState('');
   const navigate = useNavigate();
+  const [viewUsageBar, setViewUsageBar] = useState(false);
 
   const generateApiKey = async () => {
     if (!userDetails.UserName) {
@@ -32,7 +33,7 @@ const UserProfile = () => {
 
       const data = await response.json();
       userDetails.ApiKey = data.data
-      setApiKey(data.data);
+      setApiKey(userDetails.ApiKey)
       toast.success(data.message);
     } catch (error) {
       toast.error('An error occurred while generating the API key');
@@ -63,15 +64,25 @@ const UserProfile = () => {
   }
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(apiKey);
-    toast.info('API key copied to clipboard!');
+    console.log('apiKey')
+    navigator.clipboard.writeText(userDetails.ApiKey)
+      .then(() => {
+        toast.info('API key copied to clipboard!');
+      })
+      .catch(error => {
+        toast.error('Failed to copy API key to clipboard.');
+        console.error('Clipboard copy failed:', error);
+      });
   };
+  
+  
+  
 
   if (loginState === undefined) return <ProfileShimmer />;
 
   return !loginState ? <SignInPrompt /> : (
-    <div className="min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-6 flex items-center justify-center">
-      <div className="max-w-3xl w-full bg-gray-900 text-gray-100 rounded-2xl shadow-2xl p-8 md:p-10">
+    <div className="min-h-screen  p-6 flex items-center justify-center flex-col max-lg:p-3 ">
+      <div className="max-w-3xl w-full  text-gray-100 rounded-2xl shadow-2xl p-8 md:p-10 max-md:p-3">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-4xl font-bold">User Profile</h1>
           <button
@@ -88,7 +99,8 @@ const UserProfile = () => {
           <Detail label="Email" value={userDetails.Email} />
           <Detail label="Created At" value={new Date(userDetails.createdAt).toLocaleString()} />
         </div>
-        {!userDetails.ApiKey && (
+
+        {  !userDetails.ApiKey && (
           <div className="flex justify-center mb-10">
             <button
               onClick={generateApiKey}
@@ -99,15 +111,15 @@ const UserProfile = () => {
           </div>
         )}
 
-        {userDetails.ApiKey && (
-          <div className="mt-8 bg-gray-800 p-6 rounded-xl shadow-inner">
+        { userDetails.ApiKey && (
+          <div className="mt-8 bg-gray-800 p-6  w-auto rounded-xl shadow-inner">
             <p className="text-lg font-semibold mb-2">Your API Key:</p>
             <div className="flex items-center">
               <input
                 type="text"
                 value={userDetails.ApiKey}
                 readOnly
-                className="flex-grow px-4 py-2 border rounded-lg bg-gray-700 text-gray-100"
+                className="flex-grow px-4 py-2 border rounded-lg bg-gray-700 w-52 text-gray-100"
               />
               <button
                 onClick={copyToClipboard}
@@ -122,11 +134,14 @@ const UserProfile = () => {
           </div>
         )}
 
-        <Notice
-          title="Important Notice"
-          message="Please do not share your API key with anyone. Your API key is unique to your account and can be used to access sensitive information."
-        />
+        <div className='flex flex-col items-center mt-8'>
+         
+          <button className='m-2 p-2 hover:bg-green-700 bg-slate-700 rounded-lg ' onClick={() => setViewUsageBar(!viewUsageBar)}>View API Usage</button>
+          {viewUsageBar && <BarChart />}
+        </div>
       </div>
+
+
     </div>
   );
 };
@@ -138,11 +153,11 @@ const Detail = ({ label, value }) => (
   </div>
 );
 
-const Notice = ({ title, message }) => (
-  <div className="mt-10 p-6 bg-gray-700 border border-gray-600 rounded-lg shadow-sm">
-    <h2 className="text-2xl font-bold text-gray-300 mb-2">{title}</h2>
-    <p className="text-sm text-gray-300">{message}</p>
-  </div>
-);
+// const Notice = ({ title, message }) => (
+//   <div className="mt-5 p-4 bg-gray-700 border border-gray-600 rounded-lg shadow-sm">
+//     <h2 className="text-xl font-bold text-gray-300 mb-2">{title}</h2>
+//     <p className="text-base text-gray-300">{message}</p>
+//   </div>
+// );
 
 export default UserProfile;

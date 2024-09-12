@@ -1,34 +1,36 @@
 import React from 'react';
 import CodeDemo from '../pages/CodeDemo';
-import { FaCloudUploadAlt , FaLock } from "react-icons/fa";
+import { FaCloudUploadAlt, FaLock } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
 import FAQComponent from '../pages/FAQComponent';
+import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <>
       <div className='flex justify-center flex-col'>
         <div className='flex justify-center'>
-          <p className='mt-20 border-2 p-1 px-2 rounded-2xl  border-white'>Now: Effotless soltutions for devvelopers |
-            <span className='text-blue-700'>Learn more></span>
+          <p className='mt-20 border-2 p-1 px-2 rounded-2xl  border-white max-sm:mt-2'>Now: Effotless soltutions for devvelopers |
+            <span className='text-blue-700 max-sm:flex max-sm:justify-center'>Learn more></span>
           </p>
         </div>
-        <div className='flex flex-col text-5xl font-extrabold items-center mt-5 text'>
-          <span>Optimize Your API</span>
-          <span>Development</span>
+        <div className='flex flex-col text-5xl font-extrabold items-center mt-5 text max-sm:text-3xl '>
+          <span>𝕆𝕡𝕥𝕚𝕞𝕚𝕫𝕖 𝕐𝕠𝕦𝕣 𝔸ℙ𝕀</span>
+          <span>𝔻𝕖𝕧𝕖𝕝𝕠𝕡𝕞𝕖𝕟𝕥</span>
         </div>
-        <div className='flex items-center text-xl flex-col'>
-          <span>Resolve CORS issues seamlessly with our secure API Keys. Focues on building</span>
+        <div className=' items-center text-xl flex-col max-sm:text-base flex max-sm:flex-none sm:flex '>
+          <span>Resolve CORS issues seamlessly with our secure API Keys. Focus on building</span>
           <span>great Application without hassle</span>
           <div className='h-48 w-48 rounded-3xl mt-6 bg-slate-300'>
-            <img src='https://res.cloudinary.com/bsingh6636/image/upload/v1725749746/projects/apiSerice/image3_qnqjha.webp' alt='iamge3'/>
+            <img src='https://res.cloudinary.com/bsingh6636/image/upload/v1725749746/projects/apiSerice/image3_qnqjha.webp' alt='iamge3' />
           </div>
-          <Home2/>
-          <Home3/>
-          <FAQComponent/>
-          <Home4/>
+          <Home2 />
+          <Home3 />
+          <FAQComponent />
+          <Home4 />
+          <Homee />
         </div>
       </div>
-      <Homee />
+      
     </>
 
   );
@@ -36,30 +38,36 @@ const Home = () => {
 
 export default Home;
 
-const Home2 = () =>{
-  return(
-    <div className='mt-10 flex flex-row ml-12'>
-  <div className='w-1/2 mr-5 '>
-    <p className='text-blue-700 mb-5'>Seamless API Integration</p>
-    <h1 className='font-extrabold text-5xl'>Unlock your application potential</h1>
-    <p className='mt-9'>Effortlessly resolve CORS issues and streamline your development process</p>
-    <div className='flex flex-row mt-10 ml-5'>
-      <div className='text-blue-600 flex flex-col items-center mr-4'>
-        <FaCloudUploadAlt className='mb-2'/>
-        <FaLock className='mb-2'/>
-        <FaBoltLightning />
-      </div>
-      <div>
-        <p className='text-base'><strong>Instant CORS Resolution:</strong> Transform complex integration into smooth API interaction</p>
-        <p><strong>Secure API Keys:</strong> Protect your data with tailored user-specific keys.</p>
-        <p><strong>Quick Setup:</strong> Get started swiftly without any hassle</p>
+const Home2 = () => {
+  return ( 
+    <div className='mt-10 flex flex-row max-md:flex-col max-lg:w-96'>
+    <div className='flex-1 md:w-1/2 md:mr-5'>
+      <p className='text-blue-700 mb-5 text-base sm:text-lg md:text-xl'>Seamless API Integration</p>
+      <h1 className='font-extrabold text-2xl max-lg:text-xl  lg:text-5xl '>
+        Unlock your application potential
+      </h1>
+      <p className='mt-5 md:mt-9 text-sm sm:text-base lg:text-lg'>
+        Effortlessly resolve CORS issues and streamline your development process if u r having  request blocked CORS policy:  No 'Access-Control-Allow-Origin'
+      </p>
+      <div className='flex flex-col md:flex-row mt-5 md:mt-10'>
+        <div className='text-blue-600 flex flex-row md:flex-col items-center mb-5 md:mb-0 md:mr-4'>
+          <FaCloudUploadAlt className='mb-1' />
+          <p className='text-black mb-0'>df</p>
+          <FaLock className='mt-3' />
+          <FaBoltLightning className='mt-3'/>
+        </div>
+        <div className='w-'>
+          <p className='text-xs  lg:text-lg'><strong>Instant CORS Resolution:</strong> Transform complex integration into smooth API interaction</p>
+          <p className='text-xs lg:text-lg'><strong>Secure API Keys:</strong> Protect your data with tailored user-specific keys.</p>
+          <p className='text-xs lg:text-lg'><strong>Quick Setup:</strong> Get started swiftly without any hassle</p>
+        </div>
       </div>
     </div>
+    <div className='flex-1 mt-5 md:mt-0 md:w-1/2'>
+      <CodeDemo />
+    </div>
   </div>
-  <div className='w-1/2 text-sm'>
-    <CodeDemo/>
-  </div>
-</div>
+  
 
   )
 }
@@ -67,10 +75,10 @@ const Home2 = () =>{
 
 const Home3 = () => {
   return (
-    <div className="bg-black text-white py-16 px-8">
+    <div className="bg-black text-white py-16 px-8 max-sm:py-10 max-sm:px-2">
       <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-4xl font-bold mb-4">Unlock the Power of APIs</h1>
-        <p className="text-lg mb-12">
+        <h1 className="text-4xl font-bold mb-4 max-sm:text-2xl">Unlock the Power of APIs</h1>
+        <p className="text-lg mb-12 max-sm:text-base">
           Effortlessly integrate our secure APIs and enhance your application's capabilities while avoiding CORS issues.
         </p>
       </div>
@@ -84,8 +92,8 @@ const Home3 = () => {
             </svg>
           </div>
           <div>
-            <h2 className="text-xl font-bold">Get Your API Key</h2>
-            <p>Sign up and get your unique API key to start integrating with ease and security.</p>
+            <h2 className="text-xl font-bold max-sm:text-sm">Get Your API Key</h2>
+            <p className='max-sm:text-xs'>Sign up and get your unique API key to start integrating with ease and security.</p>
           </div>
         </div>
 
@@ -97,8 +105,8 @@ const Home3 = () => {
             </svg>
           </div>
           <div>
-            <h2 className="text-xl font-bold">Integrate Seamlessly</h2>
-            <p>Follow our straightforward guides to integrate our APIs into your application without hassle.</p>
+            <h2 className="text-xl font-bold max-sm:text-sm">Integrate Seamlessly</h2>
+            <p className='max-sm:text-xs'>Follow our straightforward guides to integrate our APIs into your application without hassle.</p>
           </div>
         </div>
 
@@ -110,8 +118,8 @@ const Home3 = () => {
             </svg>
           </div>
           <div>
-            <h2 className="text-xl font-bold">Go Live</h2>
-            <p>Launch your application with confidence, backed by our secure and efficient API services.</p>
+            <h2 className="text-xl font-bold max-sm:text-sm">Go Live</h2>
+            <p className='max-sm:text-xs'>Launch your application with confidence, backed by our secure and efficient API services.</p>
           </div>
         </div>
       </div>
@@ -161,20 +169,7 @@ const Home4 = () => {
 const Homee = () => {
   return (
     <div className="max-w-7xl mx-auto p-6 flex flex-col space-y-8">
-      {/* Welcome Section */}
-      <div className="bg-gradient-dark p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
-        <img
-          src="/images/welcome-bg.svg"
-          alt="Background"
-          className="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"
-        />
-        <h1 className="text-4xl font-bold text-gray-100 mb-4 z-10 relative">
-          Welcome to Your API Dashboard
-        </h1>
-        <p className="text-gray-300 leading-relaxed z-10 relative">
-          Our platform provides developers with secure and efficient access to our APIs by offering unique API keys. These keys help you bypass CORS issues, enabling seamless communication between your applications and our servers.
-        </p>
-      </div>
+     
 
       {/* Benefits Section */}
       <div className="bg-gradient-light p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
@@ -183,50 +178,10 @@ const Homee = () => {
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"
         />
-        <h2 className="text-3xl font-semibold text-gray-100 mb-4 z-10 relative">
-          Benefits of Using Our API
-        </h2>
-        <ul className="list-disc list-inside text-gray-300 leading-relaxed space-y-2 z-10 relative">
-          <li>Resolve CORS issues effortlessly with a simple API key integration.</li>
-          <li>Secure access to your data with unique, user-specific API keys.</li>
-          <li>Quick and easy setup, enabling you to focus on building your application.</li>
-          <li>Access to robust, reliable, and scalable API endpoints for your needs.</li>
-        </ul>
       </div>
 
-      {/* How It Works Section */}
-      <div className="bg-gradient-dark p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
-        <img
-          src="/images/how-it-works-bg.svg"
-          alt="Background"
-          className="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"
-        />
-        <h2 className="text-3xl font-semibold text-gray-100 mb-4 z-10 relative">
-          How It Works
-        </h2>
-        <p className="text-gray-300 leading-relaxed mb-4 z-10 relative">
-          When you create an account on our website, you receive a unique API key. This key acts as a secure identifier, allowing your applications to access our API without encountering cross-origin errors. Simply include the key in the `Authorization` header of your HTTP requests to gain access to our data.
-        </p>
-        <CodeDemo />
-      </div>
-
-      {/* Getting Started Section */}
-      <div className="bg-gradient-light p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
-        <img
-          src="/images/getting-started-bg.svg"
-          alt="Background"
-          className="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"
-        />
-        <h2 className="text-3xl font-semibold text-gray-100 mb-4 z-10 relative">
-          Getting Started
-        </h2>
-        <p className="text-gray-300 leading-relaxed mb-4 z-10 relative">
-          To begin using our API, simply generate your API key from your user dashboard. Once you have your key, include it in your application's HTTP requests to start fetching data seamlessly.
-        </p>
-        <p className="text-gray-300 leading-relaxed z-10 relative">
-          Need help integrating? Check out our documentation or use the `CodeDemo` component to see a working example of API integration.
-        </p>
-      </div>
+    
+     
 
       {/* Support & Resources Section */}
       <div className="bg-gradient-dark p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
@@ -243,19 +198,13 @@ const Homee = () => {
         </p>
         <ul className="list-disc list-inside text-gray-300 leading-relaxed space-y-2 z-10 relative">
           <li>
-            <a href="/docs" className="text-gray-100 hover:text-gray-400 hover:underline">
-              API Documentation
-            </a>
+            {/* <a href="/documentation" className="text-gray-100 hover:text-gray-400 hover:underline"> */}
+    <Link to='/documentation' className='text-gray-100 hover:text-gray-400'> API Documentation </Link>
           </li>
           <li>
-            <a href="/support" className="text-gray-100 hover:text-gray-400 hover:underline">
+            {/* <a href="/support" className="text-gray-100 hover:text-gray-400 hover:underline" onClick={}>
               Contact Support
-            </a>
-          </li>
-          <li>
-            <a href="/community" className="text-gray-100 hover:text-gray-400 hover:underline">
-              Join our Community
-            </a>
+            </a> */}
           </li>
         </ul>
       </div>

@@ -1,4 +1,9 @@
 /* styles.css */
+
+.override-white-space {
+  white-space: normal; /* or other values like 'wrap', 'pre-wrap', etc. */
+}
+
 .hover-scale {
   @apply transform transition-transform duration-300 ease-in-out hover:scale-defined;
 }
@@ -18,4 +23,31 @@ a:hover {
 body {
   background-color: black;
   color: whitesmoke;
+}
+
+.components:hover{
+  background-color: black !important;
+  scale: 1.009 ;
+
+}
+.nav-link:hover, .nav-link:focus {
+  background-color: #007BFF; /* Blue color for hover */
+  scale: 1.05;
+}
+
+@media(max-width : 640px){
+ 
+  body{
+    font-size: 14px !important;
+    /* background-color: wheat; */
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

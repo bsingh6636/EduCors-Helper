@@ -3,6 +3,7 @@ import { BackEndPort } from '../import';
 import { toast } from 'react-toastify';
 import { Context } from '../App';
 import { useNavigate } from 'react-router-dom';
+import { FaSpinner } from 'react-icons/fa'; // Import spinner icon
 import '../css/SignInAndSignUp.css';
 
 const SignInAndSignUp = () => {
@@ -15,8 +16,8 @@ const SignInAndSignUp = () => {
     const [UserName, setUserName] = useState('');
     const [Name, setName] = useState('');
     const [isSignUp, setIsSignUp] = useState(false);
+    const [loading, setLoading] = useState(false); // Loading state
 
-    // Error states
     const [errors, setErrors] = useState({
         UserNameorEmail: '',
         Password: '',
@@ -34,9 +35,9 @@ const SignInAndSignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Start spinner
         let hasErrors = false;
 
-        // Reset errors
         setErrors({
             UserNameorEmail: '',
             Password: '',
@@ -45,10 +46,10 @@ const SignInAndSignUp = () => {
             Name: ''
         });
 
-        // Validation checks
         if (isSignUp) {
             if (!Email || !UserName || !Name || !Password) {
                 toast.error('Please fill in all fields.');
+                setLoading(false);
                 return;
             }
 
@@ -71,6 +72,7 @@ const SignInAndSignUp = () => {
         } else {
             if (!UserNameorEmail || !Password) {
                 toast.error('Please fill in all fields.');
+                setLoading(false);
                 return;
             }
 
@@ -84,7 +86,10 @@ const SignInAndSignUp = () => {
             }
         }
 
-        if (hasErrors) return;
+        if (hasErrors) {
+            setLoading(false);
+            return;
+        }
 
         try {
             if (isSignUp) {
@@ -98,9 +103,8 @@ const SignInAndSignUp = () => {
                 const response = await signUp.json();
                 if (response.success) {
                     toast.success(response.message);
-                    toast(response.message);
-                    setUserDetails(response.data)
-                    setLoginState(true)
+                    setUserDetails(response.data);
+                    setLoginState(true);
                     navigate('/profile');
                 } else {
                     toast.error(response.message);
@@ -116,73 +120,76 @@ const SignInAndSignUp = () => {
                 const response = await signIn.json();
                 if (response.success) {
                     toast(response.message);
-                    setUserDetails(response.data)
-                    setLoginState(true)
+                    setUserDetails(response.data);
+                    setLoginState(true);
                     navigate('/profile');
                 } else {
                     toast.error(response.message);
                 }
             }
         } catch (error) {
-            console.log('error',error)
-            toast.error("error occured",error);
+            console.log('error', error);
+            toast.error('An error occurred.');
+        } finally {
+            setLoading(false); // Stop spinner
         }
     };
 
     return (
         <div className="auth-container text-black">
-            <div className={`auth-box ${isSignUp ? 'slide-right' : 'slide-left'}`}>
+            <div className={`auth-box ${isSignUp ? 'slide-right max-lg:ml-[-80px] ' : 'slide-left max-lg:ml-20'} max-lg:w-96`}>
                 <h3 className={`auth-title ${isSignUp ? 'fade-in' : 'fade-out'}`}>
                     {isSignUp ? 'User Sign-Up' : 'User Login'}
                 </h3>
                 <form onSubmit={handleSubmit} className="auth-form">
                     {isSignUp && (
                         <>
-                            <InputField 
-                                label="Email" 
-                                type="email" 
-                                value={Email} 
-                                onChange={(e) => setEmail(e.target.value)} 
+                            <InputField
+                                label="Email"
+                                type="email"
+                                value={Email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 error={errors.Email}
                             />
-                            <InputField 
-                                label="UserName" 
-                                type="text" 
-                                value={UserName} 
-                                onChange={(e) => setUserName(e.target.value)} 
+                            <InputField
+                                label="UserName"
+                                type="text"
+                                value={UserName}
+                                onChange={(e) => setUserName(e.target.value)}
                                 error={errors.UserName}
                             />
-                            <InputField 
-                                label="Name" 
-                                type="text" 
-                                value={Name} 
-                                onChange={(e) => setName(e.target.value)} 
+                            <InputField
+                                label="Name"
+                                type="text"
+                                value={Name}
+                                onChange={(e) => setName(e.target.value)}
                                 error={errors.Name}
                             />
                         </>
                     )}
                     {!isSignUp && (
-                        <InputField 
-                            label="Enter Email or UserName" 
-                            type="text" 
-                            value={UserNameorEmail} 
-                            onChange={(e) => setUserNameorEmail(e.target.value)} 
+                        <InputField
+                            label="Enter Email or UserName"
+                            type="text"
+                            value={UserNameorEmail}
+                            onChange={(e) => setUserNameorEmail(e.target.value)}
                             error={errors.UserNameorEmail}
                         />
                     )}
-                    <InputField 
-                        label="Password" 
-                        type="password" 
-                        value={Password} 
-                        onChange={(e) => setPassword(e.target.value)} 
+                    <InputField
+                        label="Password"
+                        type="password"
+                        value={Password}
+                        onChange={(e) => setPassword(e.target.value)}
                         error={errors.Password}
                     />
 
                     <button
                         type="submit"
                         className="auth-button primary-button"
+                        disabled={loading}
                     >
-                        {isSignUp ? 'Sign Up' : 'Sign In'}
+                        {loading ? <FaSpinner className="spinner" /> : (isSignUp ? 'Sign Up' : 'Sign In')}
                     </button>
                     <button
                         type="button"

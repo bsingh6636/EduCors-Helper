@@ -14,5 +14,4 @@ router.post('/getData' , VerifyApiKey,forwardUrl)
 // router.post('/getData' , forwardUrl)
 router.get('/signOut', userLogOut)
 router.post('/apiUsage', getApiUsage)
-
 export default router ;

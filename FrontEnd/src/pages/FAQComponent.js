@@ -21,24 +21,24 @@ const FAQComponent = () => {
   ];
 
   return (
-    <div className=" text-white p-10">
-      <h2 className="text-4xl font-bold mb-4 text-center">FAQs & Information</h2>
-      <p className="text-center text-gray-400 mb-10">Discover answers to the most common questions about our CORS-Solving API</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+    <div className=" text-white p-10 max-sm:p-3  max-lg:w-96">
+      <h2 className="text-4xl font-bold mb-4 text-center max-sm:text-2xl">FAQs & Information</h2>
+      <p className="text-center text-gray-400 mb-10 max-sm:text-sm ">Discover answers to the most common questions about our CORS-Solving API</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-auto">
         {faqs.map((faq, index) => (
           <div key={index} className="flex">
             <div className="bg-gray-800 p-4 rounded-full mr-4">
-              <span className="text-2xl">?</span>
+              <span className="text-xl">?</span>
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-2">{faq.question}</h3>
-              <p className="text-gray-300">{faq.answer}</p>
+              <h3 className="text-xl font-semibold mb-2 max-sm:text-sm">{faq.question}</h3>
+              <p className="text-gray-30 max-sm:text-xs">{faq.answer}</p>
             </div>
           </div>
         ))}
       </div>
       <div className="mt-10 text-center flex justify-center ">
-        <p className="text-gray-400 border-2  w-max border-blue-600 rounded-3xl p-1 px-2 bg-slate-800">Can't find what you're looking for? <a href="/contact" className="text-blue-500 underline">Contact our support</a></p>
+        <p className="text-gray-400 border-2  w-max border-blue-600 rounded-3xl p-1 px-2 bg-slate-800 max-sm:text-sm">Can't find what you're looking for? <a href="/contact" className="text-blue-500 underline">Contact our support</a></p>
       </div>
     </div>
   );

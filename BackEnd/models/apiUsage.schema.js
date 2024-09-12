@@ -1,10 +1,14 @@
-// models/ApiUsage.js
 import mongoose from 'mongoose';
 
-const usageRecordSchema = new mongoose.Schema({
+const endpointRecordSchema = new mongoose.Schema({
     endpoint: { type: String, required: true },
     calls: { type: Number, default: 1 },
-    timestamps: [{ type: Date }] // Array to store the date and time of each call
+});
+
+const dailyRecordSchema = new mongoose.Schema({
+    date: { type: String, required: true },
+    calls: { type: Number, default: 1 },
+    endpointRecord: [endpointRecordSchema], // Corrected schema reference
 });
 
 const apiUsageSchema = new mongoose.Schema({
@@ -13,9 +17,16 @@ const apiUsageSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
-    totalApiCalls: { type: Number, default: 0 },
-    usageRecords: [usageRecordSchema], // Array to store usage records
+    totalApiCalls: { type: Number, default: 1 },
+    usageRecords: [
+        {
+            month: { type: String, required: true },
+            totalEndpointCalls: { type: Number, default: 1 },
+            dailyRecord: [dailyRecordSchema], // Corrected schema reference
+        }
+    ],
 });
 
 const ApiUsage = mongoose.model('ApiUsage', apiUsageSchema);
 export default ApiUsage;
+

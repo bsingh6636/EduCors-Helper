@@ -4,16 +4,24 @@ import Home from './components/Home';
 import SignInAndSignUp from './components/SignnInAndSIngUp'; 
 import UserProfile from './components/UserProfile';
 // import DashBoard from './components/DashBoard';
-import UserDashBoard from './components/UserDashBoard';
+import UserDashBoard from './pages/UserDashBoard';
 import Footer from './components/Footer';
+import Docs from './components/Docs';
 
 
 // Import from pages
 import Error from './pages/Error';
 import SignInPrompt from './pages/SignInPrompt';
+import BarChart from './pages/UserBarGraph';
+
+//import from functions
+import { presentDateGenerator } from './Functions/getCurrentTime';
 
 // Import from others
 const BackEndPort = process.env.REACT_APP_BACKEND_SERVER;
 
 // Export statements
-export { Header, Home, SignInAndSignUp, UserProfile  , UserDashBoard ,Footer ,  Error, SignInPrompt , BackEndPort };
+export { Header, Home, SignInAndSignUp, UserProfile  , UserDashBoard ,Footer , Docs 
+    , Error, SignInPrompt , BarChart
+    , presentDateGenerator , 
+      BackEndPort };
