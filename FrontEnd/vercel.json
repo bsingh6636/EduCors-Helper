@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/getData",
-      "destination": "https://cors-prod2.vercel.app/api/getData"
+      "destination": "https://api-service-prod3.vercel.app/api/getData"
     },
     {
       "source": "/api/(.*)",
