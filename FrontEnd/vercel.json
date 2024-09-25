@@ -6,7 +6,7 @@
     },
     {
       "source": "/api/(.*)",
-      "destination": "https://api-service-backennd.vercel.app/api/$1"
+      "destination": "https://api-service-for-web.vercel.app/api/$1"
     }
   ]
 }

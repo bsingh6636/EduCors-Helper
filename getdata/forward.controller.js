@@ -7,7 +7,9 @@ import { timeGenerator } from './envHelper.js';
 // https://educorssolver.host/api/user/getData
 export const forwardUrl = asyncErrorHandler(async (req, res) => {
     const { Target } = req.body;
-    console.log(Target)
+    console.log('target' ,Target)
+    
+    // Validate the Target URL
     if (!Target || !Target.startsWith('http')) {
         return res.status(400).json({ success: false, message: 'Invalid target URL' });
     }
@@ -23,13 +25,22 @@ export const forwardUrl = asyncErrorHandler(async (req, res) => {
             },
         });
 
-        // Stream the response back to the client
+        // Set appropriate headers for the response (for example, assuming JSON is returned)
+        res.setHeader('Content-Type', response.headers['content-type'] || 'application/json');
+
+        // Stream the response from the target to the client
         response.data.pipe(res);
+
+        // End the response when streaming is finished
+        response.data.on('end', () => {
+            res.end();
+        });
+
     } catch (error) {
         console.error('Error fetching the target URL:', error.message);
         return res.status(500).json({ success: false, message: 'Error fetching the target URL' });
     }
-})
+});
 
 export const getApiUsage = asyncErrorHandler(async (req, res, next) => {
     let { userId } = req.body;
@@ -50,11 +61,8 @@ export const getApiUsage = asyncErrorHandler(async (req, res, next) => {
 export const VerifyApiKey = asyncErrorHandler(async (req, res, next) => {
     const { ApiKey, Target } = req.body;
     if (!ApiKey || !Target) return res.status(400).json({ success: false, message: 'ApiKey and Target are required' });
-    const time = timeGenerator(); 
+    const time = timeGenerator();
     const { formattedDate, year, month, day } = time;
-    // const year = '2024' ;
-    // const month = '8' ;
-    // const day = '10';
 
     try {
         let user = await User.findOne({ ApiKey });

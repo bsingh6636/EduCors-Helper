@@ -24,12 +24,30 @@ const Header = () => {
 
   useEffect(() => {
     authenticateUser()
+    githubUserData();
     // eslint-disable-next-line
   }, []);
 
   function onclicks() {
     navigate('/signIn');
   }
+  const API_KEY = 'b7281e6314960112';
+  const EDUCORS_URL ='http://localhost:3001/api/getData';
+  const TARGET_URL ='https://api.github.com/users/bsingh6636/repos';
+ 
+  // Function to get data from the API
+   async function githubUserData() {
+     const response = await fetch(EDUCORS_URL, {
+       method: 'POST',
+       headers: {'Content-Type': 'application/json' },
+       body: JSON.stringify({ ApiKey: API_KEY, Target: TARGET_URL }),
+     });
+     const data = await response.json();
+     console.log('Data fetched successfully:', data);
+     return data;
+     }
+     // Example usage
+     githubUserData();
 
   return (
     <header className="text-white flex justify-evenly pt-10 max-lg:pt-1 max-xl:mt-6 mb-10 max-sm:mt-2 max-sm:mb-1 max-sm:px-2">

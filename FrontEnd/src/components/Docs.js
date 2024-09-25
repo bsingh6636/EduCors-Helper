@@ -41,7 +41,7 @@ set the request's mode to 'no-cors' to fetch the resource with CORS disabled.`}
             {`// It's recommended to use environment variables for sensitive information like API keys.
 const API_KEY = 'your_api_key';
 const EDUCORS_URL = 'https://educorssolver.host/api/getData';
-const TARGET_URL = 'https://api.example.com/data';
+const TARGET_URL = 'https://api.github.com/users/bsingh6636/repos';
 
 async function fetchData() {
   const response = await fetch(EDUCORS_URL, {
