@@ -4,6 +4,7 @@ import { FaCloudUploadAlt, FaLock } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
 import FAQComponent from '../pages/FAQComponent';
 import { Link } from 'react-router-dom';
+import Hover from './Hovercard';
 const Home = () => {
   return (
     <>
@@ -18,11 +19,10 @@ const Home = () => {
           <span>𝔻𝕖𝕧𝕖𝕝𝕠𝕡𝕞𝕖𝕟𝕥</span>
         </div>
         <div className=' items-center text-xl flex-col max-sm:text-base flex max-sm:flex-none sm:flex '>
+        
           <span>Resolve CORS issues seamlessly with our secure API Keys. Focus on building</span>
           <span>great Application without hassle</span>
-          <div className='h-48 w-48 rounded-3xl mt-6 bg-slate-300'>
-            <img src='https://res.cloudinary.com/bsingh6636/image/upload/v1725749746/projects/apiSerice/image3_qnqjha.webp' alt='iamge3' />
-          </div>
+          <Hover/>
           <Home2 />
           <Home3 />
           <FAQComponent />
@@ -170,20 +170,6 @@ const Homee = () => {
   return (
     <div className="max-w-7xl mx-auto p-6 flex flex-col space-y-8">
      
-
-      {/* Benefits Section */}
-      <div className="bg-gradient-light p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
-        <img
-          src="/images/benefits-bg.svg"
-          alt="Background"
-          className="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"
-        />
-      </div>
-
-    
-     
-
-      {/* Support & Resources Section */}
       <div className="bg-gradient-dark p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
         <img
           src="/images/support-bg.svg"

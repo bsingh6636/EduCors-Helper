@@ -64,7 +64,6 @@ const UserProfile = () => {
   }
 
   const copyToClipboard = () => {
-    console.log('apiKey')
     navigator.clipboard.writeText(userDetails.ApiKey)
       .then(() => {
         toast.info('API key copied to clipboard!');

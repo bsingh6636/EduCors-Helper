@@ -6,9 +6,10 @@ import ApiUsage from './models/apiUsage.schema.js'
 import { timeGenerator } from './envHelper.js';
 // https://educorssolver.host/api/user/getData
 export const forwardUrl = asyncErrorHandler(async (req, res) => {
-    const { Target } = req.body;
-    console.log('target' ,Target)
-    
+    let { Target } = req.body;
+    if (!Target) Target = req.query.Target;
+    console.log('target', Target)
+
     // Validate the Target URL
     if (!Target || !Target.startsWith('http')) {
         return res.status(400).json({ success: false, message: 'Invalid target URL' });
@@ -59,8 +60,11 @@ export const getApiUsage = asyncErrorHandler(async (req, res, next) => {
 
 
 export const VerifyApiKey = asyncErrorHandler(async (req, res, next) => {
-    const { ApiKey, Target } = req.body;
-    if (!ApiKey || !Target) return res.status(400).json({ success: false, message: 'ApiKey and Target are required' });
+    let { ApiKey, Target } = req.body;
+    if (!ApiKey) ApiKey = req.query.ApiKey;
+    if (!Target) Target = req.query.Target;
+    if (!ApiKey) return res.status(400).json({ success: false, message: 'ApiKey is  required' });
+    if (!Target) return res.status(400).json({ success: false, message: 'Target is required' });
     const time = timeGenerator();
     const { formattedDate, year, month, day } = time;
 

@@ -39,7 +39,6 @@ const CodeDemo = () => {
       setTimeout(() => setIsCopied(false), 2000); // Reset after 2 seconds
     });
   };
-console.log(code.split('\n'))
   return (
     <div className="code-demo-container mt-8 sm:mt-10 md:mt-12 text-sm max-sm:text-xs">
   <pre className="code-block p-4 sm:p-6 md:p-8 bg-gray-900 text-white overflow-x-auto rounded-lg">

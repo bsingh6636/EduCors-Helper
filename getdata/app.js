@@ -7,7 +7,7 @@ const app = express();
 
 
 app.use(cors({
-    origin : '*' ,
+    origin: '*',
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -16,7 +16,5 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use(express.json());
-
-app.post('/api/getData', VerifyApiKey , forwardUrl);
-
+app.use('/api/getData', VerifyApiKey, forwardUrl);
 export default app;
