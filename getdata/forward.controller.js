@@ -65,6 +65,12 @@ export const VerifyApiKey = asyncErrorHandler(async (req, res, next) => {
     if (!Target) Target = req.query.Target;
     if (!ApiKey) return res.status(400).json({ success: false, message: 'ApiKey is  required' });
     if (!Target) return res.status(400).json({ success: false, message: 'Target is required' });
+    if (ApiKey.length > 25) {
+        return res.status(400).json({ success: false, message: 'ApiKey length exceeds 25 characters' });
+    }
+    if (Target.length > 300) {
+        return res.status(400).json({ success: false, message: 'Target length exceeds 300 characters' });
+    }
     const time = timeGenerator();
     const { formattedDate, year, month, day } = time;
 
