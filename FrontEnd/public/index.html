@@ -10,38 +10,104 @@
       content="Solve CORS issues with unique API keys and secure, scalable API access for developers. Get started with our API platform today!"
     />
     <meta
-    name="keywords"
-    content="API dashboard, CORS issues, API key, bypass CORS, secure API access, developer API, scalable endpoints, API integration"
-  />
-  <meta name="author" content="Edu-CORS Solver Team" />
+      name="keywords"
+      content="API dashboard, CORS issues, API key, bypass CORS, secure API access, developer API, scalable endpoints, API integration"
+    />
+    <meta name="author" content="Edu-CORS Solver Team" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-  
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-   
+
     <title>EDU CORS-Solver | Your API Dashboard</title>
+
     <style>
-      
-      
-      /* Styling for the noscript message */
-      noscript {
-          display: block;
-          background-color: #ffdddd;
-          color: #cc0000;
-          border: 1px solid #cc0000;
-          border-radius: 5px;
-          padding: 20px;
-          max-width: 600px;
-          width: 90%;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #151515;
+        color: #fff;
       }
-      #root {
-          background-color: #151515;
+
+      /* Styling for the hexagon loader */
+      .loader-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #151515;
+        z-index: 9999;
       }
-  </style>
+
+      .hexagon {
+        width: 60px;
+        height: 35px;
+        background-color: #29b6f6;
+        position: relative;
+        animation: rotate 2s linear infinite;
+      }
+
+      .hexagon::before,
+      .hexagon::after {
+        content: "";
+        position: absolute;
+        width: 60px;
+        height: 35px;
+        background-color: inherit;
+      }
+
+      .hexagon::before {
+        top: -17.5px;
+        transform: rotate(60deg);
+      }
+
+      .hexagon::after {
+        bottom: -17.5px;
+        transform: rotate(-60deg);
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        color: #29b6f6;
+      }
+    </style>
   </head>
   <body>
     <noscript>Welcome to Edu-CORS Solver : Your CORS Solution</noscript>
+
+    <!-- Loading screen with hexagon animation -->
+    <div class="loader-wrapper" id="loader-wrapper">
+      <div class="hexagon"></div>
+      <div class="loading-text">Loading Edu-CORS Solver...</div>
+    </div>
+
     <div id="root"></div>
-   
+
+    <script>
+      // Wait until the content has fully loaded
+      window.addEventListener("load", function () {
+        const loaderWrapper = document.getElementById("loader-wrapper");
+        // Add a small delay before removing the loader for a smooth transition
+        setTimeout(() => {
+          loaderWrapper.style.opacity = 0;
+          setTimeout(() => {
+            loaderWrapper.style.display = "none";
+          }, 500); // Hide after transition
+        }, 1000); // Delay after loading content
+      });
+    </script>
   </body>
 </html>

@@ -22,24 +22,8 @@ const Header = () => {
     }
   }
 
- 
-
-async function fetchData() {
-  const ApiKey = '53474dd44c49285d';
-  const EDUCORS_URL = 'https://educorssolver.host/api/getData';
-  const Target = 'https://api.github.com/users/bsingh6636/repos';
-  const response = await fetch(`${EDUCORS_URL}?ApiKey=${ApiKey}&Target=${Target}`);
-  const data = await response.json();
-  console.log('Data fetched successfully:', data);
-}
-fetchData();
-
-
-
   useEffect(() => {
     authenticateUser()
-    fetchData();
-    // githubUserData();
     // eslint-disable-next-line
   }, []);
 
