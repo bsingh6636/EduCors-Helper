@@ -13,7 +13,7 @@ const CodeDemo = () => {
   // Target URL from you want to fetch data m ,ex-github api
   const Target = 'https://api.github.com/users/bsingh6636/repos';
   async function getData(){
-    const response = await fetch(\`\${EDUCORS_URL}?ApiKey=\${ApiKey}&Target=\${Target}\`);
+    const response = await fetch(\`\${EDUCORS_URL}?ApiKey=\${ApiKey}&Target=\${encodeURIComponent(Target)}\`);
     const data = await response.json();
     console.log('Data fetched successfully:', data);
           }
