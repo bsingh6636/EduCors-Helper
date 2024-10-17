@@ -38,14 +38,17 @@ set the request's mode to 'no-cors' to fetch the resource with CORS disabled.`}
         <section className="mb-12">
           <h2 className="text-3xl font-semibold mb-4">Example Usage</h2>
           <pre className="bg-gray-800 p-4 rounded-md text-green-400 overflow-x-auto">
-            {`
+            { `
   const ApiKey = 'your_ApiKey';
   const EDUCORS_URL = 'https://educorssolver.host/api/getData';
   // Target URL from you want to fetch data m ,ex-github api
   const Target = 'https://api.github.com/users/bsingh6636/repos';
-  const response = await fetch(\`\${EDUCORS_URL}?ApiKey=\${ApiKey}&Target=\${Target}\`);
-  const data = await response.json();
-  console.log('Data fetched successfully:', data);
+  async function getData(){
+    const response = await fetch(\`\${EDUCORS_URL}?ApiKey=\${ApiKey}&Target=\${Target}\`);
+    const data = await response.json();
+    console.log('Data fetched successfully:', data);
+          }
+    getData()
 `}
           </pre>
         </section>
