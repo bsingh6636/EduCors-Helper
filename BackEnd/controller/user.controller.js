@@ -40,12 +40,10 @@ export const userSign = asyncErrorHandler(async (req, res) => {
 
 export const userSignUp = asyncErrorHandler(async (req, res) => {
     let { UserName, Password, Name, Email, Country } = req.body;
-    UserName = UserName.toLowerCase()
-    Email = Email.toLowerCase()
-    if (!UserName || !Password || !Name || !Email) {
+    console.log(Email, Name, Password)
+    if (!Password || !Name || !Email) {
         return res.status(400).json({ success: false, message: "All fields are required." });
     }
-
     try {
         // Check if user already exists
         const existingUser = await User.findOne({
@@ -53,12 +51,12 @@ export const userSignUp = asyncErrorHandler(async (req, res) => {
         });
 
         if (existingUser) {
-            return res.status(400).json({ success: false, message: "User already exists with this Email or UserNmae" });
+            return res.status(400).json({ success: false, message: "User already exists with this Email " });
         }
 
 
-       let user = await User.create({
-            UserName, Password, Name, Email, Country
+        let user = await User.create({
+             Password, Name, Email, Country
         })
         const payload = { id: user.id }
         user = deletePartobject(user)
@@ -68,21 +66,21 @@ export const userSignUp = asyncErrorHandler(async (req, res) => {
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn });
 
         res.cookie('userToken', token, { httpOnly: true, secure: true, sameSite: 'strict' })
-            
-            user = deletePartobject(user)
-        return res.status(201).json({ success: true, message: "User created successfully", data : user });
+
+        user = deletePartobject(user)
+        return res.status(201).json({ success: true, message: "User created successfully", data: user });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ success: false, message: "Error creating user", error });
+        return res.status(500).json({ success: false, message: error.message, error });
     }
 });
 
 export const userLogOut = asyncErrorHandler(async (req, res, next) => {
     try {
         res.clearCookie('userToken')
-        return res.status(200).json({ success: true , message : 'Logged out Sucessfully' })
+        return res.status(200).json({ success: true, message: 'Logged out Sucessfully' })
     } catch (error) {
-        return res.status(400).json({ success: false, message : 'Logged out failed' , error })
+        return res.status(400).json({ success: false, message: 'Logged out failed', error })
     }
 })
 
@@ -91,16 +89,16 @@ export const generateApiKey = asyncErrorHandler(async (req, res, next) => {
     console.log(UserName)
 
     if (!UserName) return res.status(400).json({ success: false, error: 'userName is required' });
-    
+
 
     try {
         const user = await User.findOne({ UserName });
         if (!user) return res.status(404).json({ success: false, error: 'User not found' });
-        
+
         if (user.ApiKey) {
             return res.json({ success: true, message: 'API key already exists', data: user.ApiKey });
         }
- 
+
         const ApiKey = crypto.randomBytes(8).toString('hex');
 
         const updatedUser = await User.findOneAndUpdate(
@@ -109,7 +107,7 @@ export const generateApiKey = asyncErrorHandler(async (req, res, next) => {
             { new: true, runValidators: true }
         );
 
-        return res.json({ success: true, message:'Api Key Generated', data: updatedUser.ApiKey });
+        return res.json({ success: true, message: 'Api Key Generated', data: updatedUser.ApiKey });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ success: false, message: 'Failed to generate API key' });

@@ -16,6 +16,7 @@
     "axios": "^1.7.7",
     "chart": "^0.1.2",
     "chartjs-plugin-datalabels": "^2.2.0",
+    "flowbite-react": "^0.10.2",
     "mdb-react-ui-kit": "^8.0.0",
     "mui": "^0.0.1",
     "prismjs": "^1.29.0",

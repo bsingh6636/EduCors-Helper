@@ -5,7 +5,6 @@ import { FaBoltLightning } from "react-icons/fa6";
 import FAQComponent from '../pages/FAQComponent';
 import { Link } from 'react-router-dom';
 import Hover from './Hovercard';
-import SignIn from '../LoginRelated/SignIn';
 const Home = () => {
   return (
     <>
