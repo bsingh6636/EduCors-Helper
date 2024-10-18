@@ -11,9 +11,6 @@ const calc = (x, y) => {
 
   const why = -(y - window.innerHeight / 2) / BUFFER;
   const ex = (x - window.innerWidth / 2) / BUFFER;
-
-  console.log("why", why);
-  console.log("y", y);
   return [-(y / 50), x / 50, 1];
 };
 
@@ -26,7 +23,7 @@ export default function Hover() {
   return (
     <div className="Apps mt-5">
       <animated.div
-        class="card"
+        className="card"
         onMouseMove={e => {
           const { clientX: x, clientY: y } = e;
 

@@ -5,13 +5,14 @@ import { FaBoltLightning } from "react-icons/fa6";
 import FAQComponent from '../pages/FAQComponent';
 import { Link } from 'react-router-dom';
 import Hover from './Hovercard';
+import SignIn from '../LoginRelated/SignIn';
 const Home = () => {
   return (
     <>
       <div className='flex justify-center flex-col'>
         <div className='flex justify-center'>
           <p className='mt-20 border-2 p-1 px-2 rounded-2xl  border-white max-sm:mt-2'>Now: Effotless soltutions for devvelopers |
-            <span className='text-blue-700 max-sm:flex max-sm:justify-center'>Learn more></span>
+            <span className='text-blue-700 max-sm:flex max-sm:justify-center'>Learn more</span>
           </p>
         </div>
         <div className='flex flex-col text-5xl font-extrabold items-center mt-5 text max-sm:text-3xl '>
@@ -30,7 +31,6 @@ const Home = () => {
           <Homee />
         </div>
       </div>
-      
     </>
 
   );

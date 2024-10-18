@@ -10,16 +10,20 @@ const Header = () => {
   const navigate = useNavigate();
 
   async function authenticateUser() {
-    const response = await fetch(`${BackEndPort}/auth`, {
-      credentials: 'include'
-    });
-    const data = await response.json();
-    if (data.success) {
-      setLoginState(true);
-      setUserDetails(data.data);
-    } else {
-      setLoginState(false);
-    }
+   try {
+     const response = await fetch(`${BackEndPort}/auth`, {
+       credentials: 'include'
+     });
+     const data = await response.json();
+     if (data.success) {
+       setLoginState(true);
+       setUserDetails(data.data);
+     } else {
+       setLoginState(false);
+     }
+   } catch (error) {
+     console.log(error)
+   }
   }
 
   useEffect(() => {
@@ -27,8 +31,8 @@ const Header = () => {
     // eslint-disable-next-line
   }, []);
 
-  function onclicks() {
-    navigate('/signIn');
+  function onclicks(value) {
+    navigate(value);
   }
   
 
@@ -42,9 +46,9 @@ const Header = () => {
       </div>
       <div className='flex max-lg:flex-row'>
         <button className='mx-3 px-4 py-2 max-lg:px-2 max-lg:mx-2 rounded-lg bg-white text-black border-2 border-red-600 hover:border-blue-700 hover:bg-blue-700 hover:text-white transition duration-300 ease-in-out shadow-md'
-          onClick={onclicks}>𝒮𝒾𝑔𝓃𝐼𝓃</button>
+          onClick={()=>onclicks('/signIn')}>𝒮𝒾𝑔𝓃𝐼𝓃</button>
         <button className='mx-3 px-4 py-2 max-lg:px-2 max-lg:mx-2 rounded-lg bg-blue-700 text-white border-2 border-red-600 hover:border-white hover:bg-white hover:text-blue-700 transition duration-300 ease-in-out shadow-md'
-          onClick={onclicks}>𝓢𝓲𝓰𝓷𝓤𝓹</button>
+          onClick={()=>onclicks('/signUp')}>𝓢𝓲𝓰𝓷𝓤𝓹</button>
         <div className='lg:hidden relative flex float-end'>
           {!headerState ? <RxHamburgerMenu className='text-blue-500 text-4xl ' onClick={() => setHeaderState(!headerState)} /> : <RxCross2 className='text-blue-500 text-4xl' onClick={() => setHeaderState(!headerState)}/>  }
           {headerState && (

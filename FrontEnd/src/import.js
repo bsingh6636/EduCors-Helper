@@ -9,6 +9,9 @@ import Footer from './components/Footer';
 import Docs from './components/Docs';
 
 
+//import from Login Related
+import ForgetPassword from './LoginRelated/ForgotPassword';
+
 // Import from pages
 import Error from './pages/Error';
 import SignInPrompt from './pages/SignInPrompt';
@@ -17,11 +20,14 @@ import BarChart from './pages/UserBarGraph';
 //import from functions
 import { presentDateGenerator } from './Functions/getCurrentTime';
 
+
+
 // Import from others
 const BackEndPort = process.env.REACT_APP_BACKEND_SERVER;
 
 // Export statements
 export { Header, Home, SignInAndSignUp, UserProfile  , UserDashBoard ,Footer , Docs 
+  , ForgetPassword
     , Error, SignInPrompt , BarChart
     , presentDateGenerator , 
       BackEndPort };

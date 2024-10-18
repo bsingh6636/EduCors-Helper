@@ -57,7 +57,6 @@ const BarChart = () => {
 
   const maxLabelValue = Math.max(...labelValues);
   const stepSize = Math.ceil(maxLabelValue / 10);
-  console.log(stepSize)
 
   const data = {
     labels: labels,

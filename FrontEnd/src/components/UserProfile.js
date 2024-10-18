@@ -133,11 +133,11 @@ const UserProfile = () => {
           </div>
         )}
 
-        <div className='flex flex-col items-center mt-8'>
+        {/* <div className='flex flex-col items-center mt-8'>
          
           <button className='m-2 p-2 hover:bg-green-700 bg-slate-700 rounded-lg ' onClick={() => setViewUsageBar(!viewUsageBar)}>View API Usage</button>
           {viewUsageBar && <BarChart />}
-        </div>
+        </div> */}
       </div>
 
 
