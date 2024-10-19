@@ -6,6 +6,8 @@
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/plugin-transform-numeric-separator": "^7.24.7",
+    "@chakra-ui/icons": "^2.2.4",
+    "@chakra-ui/react": "^2.10.3",
     "@darenft/react-3d-hover-card": "^1.0.9",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -13,6 +15,7 @@
     "@mui/icons-material": "^6.1.4",
     "@mui/material": "^6.1.4",
     "@mui/x-charts": "^7.16.0",
+    "@nextui-org/react": "^2.4.8",
     "axios": "^1.7.7",
     "chart": "^0.1.2",
     "chartjs-plugin-datalabels": "^2.2.0",

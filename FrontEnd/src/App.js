@@ -8,7 +8,7 @@ import { createContext, useState } from 'react';
 import Help from './components/Help';
 import SignIn from './LoginRelated/SignIn';
 import SignUp from './LoginRelated/SignUp';
-import { Component } from './components/NavbarDefault';
+import WithSubnavigation from './components/NavbarDefault'
 
 export const Context = createContext()
 function App() {
@@ -16,9 +16,12 @@ function App() {
   const [loginState, setLoginState] = useState()
   return (
     <Router>
+      
       <Context.Provider value={{ userDetails, setUserDetails, loginState, setLoginState }}>
         <Header />
-        {/* <Component/> */}
+        
+        <WithSubnavigation/>
+        {/* <App */}
         {/* <NavbarDefault/> */}
         <div className="font-mono max-sm:mx-2 max-sm:text-sm max-lg:mx-20 max-xl:mx-32 max-2xl:mx-40 2xl:mx-40" >
           {/* content bg-gradient-to-r from-black via-gray-800 to-black */}

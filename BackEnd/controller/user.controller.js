@@ -46,9 +46,7 @@ export const userSignUp = asyncErrorHandler(async (req, res) => {
     }
     try {
         // Check if user already exists
-        const existingUser = await User.findOne({
-            $or: [{ UserName }, { Email }]
-        });
+        const existingUser = await User.findOne({ Email });
 
         if (existingUser) {
             return res.status(400).json({ success: false, message: "User already exists with this Email " });
@@ -56,7 +54,7 @@ export const userSignUp = asyncErrorHandler(async (req, res) => {
 
 
         let user = await User.create({
-             Password, Name, Email, Country
+            Password, Name, Email, Country
         })
         const payload = { id: user.id }
         user = deletePartobject(user)
