@@ -70,11 +70,18 @@ const SignIn = (props) => {
   const [open, setOpen] = React.useState(false);
   const [password, setPassword] = React.useState('')
   const [email, setEmail] = React.useState('')
-  const { userDetails, setUserDetails, setLoginState } = React.useContext(Context);
+  const { loginState, userDetails, setLoginState, setUserDetails } = React.useContext(Context);
   const navigate = useNavigate()
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+
+  React.useEffect(()=>{
+    if(loginState == true){
+        navigate('/profile')
+    }
+},[])
+
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
 
   const handleClose = () => {
     setOpen(false);

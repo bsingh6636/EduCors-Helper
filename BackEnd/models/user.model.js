@@ -5,21 +5,22 @@ import validator from 'validator';
 const UserSchema = mongoose.Schema({
     UserName: {
         type: String,
+        required :[ true ,'UserName is required'],
         unique: [true, 'UserName already taken, choose another'],
         minlength: [5, 'UserName must be at least 5 characters long'],
         maxlength: [15, 'UserName must be at most 15 characters long'],
         validate: {
-            validator: function(value) {
+            validator: function (value) {
                 return /^[a-zA-Z0-9]+$/.test(value); // Only alphanumeric characters
             },
             message: 'UserName can only contain alphanumeric characters'
-        }
+        },
     },
     Name: {
         type: String,
         required: [true, 'Name is required'],
         minlength: [5, 'Name must be at least 5 characters long'],
-        maxlength: [20, 'Name must be at most 20 characters long'],
+        maxlength: [50, 'Name must be at most 50 characters long'],
     },
     Email: {
         type: String,
@@ -38,10 +39,10 @@ const UserSchema = mongoose.Schema({
     Password: {
         type: String,
         required: true,
-        minlength: [6, 'Password must be at least 6 characters long'],
+        minlength: [8, 'Password must be at least 8 characters long'],
         maxlength: [20, 'Password must be at most 20 characters long'],
         validate: {
-            validator: function(value) {
+            validator: function (value) {
                 // Password must contain at least one uppercase letter, one number, etc.
                 return /^(?=.*[A-Z])(?=.*[0-9])(?=.{6,20})/.test(value);
             },

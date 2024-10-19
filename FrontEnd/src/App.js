@@ -20,7 +20,7 @@ function App() {
       <Context.Provider value={{ userDetails, setUserDetails, loginState, setLoginState }}>
         <Header />
         
-        <WithSubnavigation/>
+        {/* <WithSubnavigation/> */}
         {/* <App */}
         {/* <NavbarDefault/> */}
         <div className="font-mono max-sm:mx-2 max-sm:text-sm max-lg:mx-20 max-xl:mx-32 max-2xl:mx-40 2xl:mx-40" >

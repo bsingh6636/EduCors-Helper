@@ -74,9 +74,6 @@ const UserProfile = () => {
       });
   };
   
-  
-  
-
   if (loginState === undefined) return <ProfileShimmer />;
 
   return !loginState ? <SignInPrompt /> : (

@@ -345,7 +345,7 @@ const SignUp = (props) => {
     const [password, setPassword] = React.useState('')
     const [email, setEmail] = React.useState('')
     const [ name , setName] = React.useState('')
-    const { userDetails, setUserDetails, setLoginState } = React.useContext(Context);
+    const { loginState, userDetails, setLoginState, setUserDetails } = React.useContext(Context);
     const navigate = useNavigate()
     const handleClickOpen = () => {
         setOpen(true);
@@ -354,6 +354,12 @@ const SignUp = (props) => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    React.useEffect(()=>{
+        if(loginState == true){
+            navigate('/profile')
+        }
+    },[])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -365,7 +371,7 @@ const SignUp = (props) => {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ Email : email, Password: password , Name : name }),
+            body: JSON.stringify({ Email : email, Password: password , Name : name , UserName : userName }),
         });
 
         const response = await signUp.json();
@@ -429,6 +435,10 @@ const SignUp = (props) => {
         setName(e.target.value)
         validateInputs()
     }
+
+    function handleUserNameCHanges(e){
+        setUserName(e.target.value)
+    }
     return (
         <AppTheme {...props}>
             <CssBaseline enableColorScheme />
@@ -462,12 +472,29 @@ const SignUp = (props) => {
                                 required
                                 fullWidth
                                 id="name"
-                                placeholder="Jon Snow"
+                                placeholder="Brijesh SIngh"
                                 error={nameError}
                                 helperText={nameErrorMessage}
                                 color={nameError ? 'error' : 'primary'}
                                 onChange={handleNameChange}
                             />
+                            
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel htmlFor="name">userName</FormLabel>
+                            <TextField
+                                autoComplete="userName"
+                                name="userName"
+                                required
+                                fullWidth
+                                id="userName"
+                                placeholder="bsingh6636"
+                                error={nameError}
+                                helperText={nameErrorMessage}
+                                color={nameError ? 'error' : 'primary'}
+                                onChange={handleUserNameCHanges}
+                            />
+                            
                         </FormControl>
                         <FormControl>
                             <FormLabel htmlFor="email">Email</FormLabel>

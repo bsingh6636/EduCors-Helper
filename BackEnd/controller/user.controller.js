@@ -54,7 +54,7 @@ export const userSignUp = asyncErrorHandler(async (req, res) => {
 
 
         let user = await User.create({
-            Password, Name, Email, Country
+           UserName ,  Password, Name, Email, Country
         })
         const payload = { id: user.id }
         user = deletePartobject(user)
@@ -66,7 +66,7 @@ export const userSignUp = asyncErrorHandler(async (req, res) => {
         res.cookie('userToken', token, { httpOnly: true, secure: true, sameSite: 'strict' })
 
         user = deletePartobject(user)
-        return res.status(201).json({ success: true, message: "User created successfully", data: user });
+        return res.status(201).json({ success: true, message: "User created successfully", data: user , token :token });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ success: false, message: error.message, error });
