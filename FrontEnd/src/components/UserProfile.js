@@ -52,7 +52,7 @@ const UserProfile = () => {
 
       if (response.ok) {
         setUserDetails(null);
-        setLoginState(true);
+        setLoginState(false);
         navigate('/signIn');
       } else {
         toast.error('Sign out failed');
@@ -75,7 +75,7 @@ const UserProfile = () => {
   };
   
   if (loginState === undefined) return <ProfileShimmer />;
-
+  console.log(loginState)
   return !loginState ? <SignInPrompt /> : (
     <div className="min-h-screen  p-6 flex items-center justify-center flex-col max-lg:p-3 ">
       <div className="max-w-3xl w-full  text-gray-100 rounded-2xl shadow-2xl p-8 md:p-10 max-md:p-3">
@@ -88,7 +88,7 @@ const UserProfile = () => {
             Sign Out
           </button>
         </div>
-
+    {console.log('user details' + userDetails)}
         <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           <Detail label="Username" value={userDetails.UserName} />
           <Detail label="Name" value={userDetails.Name} />
