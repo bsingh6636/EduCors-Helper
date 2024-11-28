@@ -11,6 +11,7 @@ const Header = () => {
 
   async function authenticateUser() {
    try {
+    console.log(BackEndPort)
      const response = await fetch(`${BackEndPort}/auth`, {
        credentials: 'include'
      });

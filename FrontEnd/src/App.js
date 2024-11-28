@@ -8,6 +8,7 @@ import { createContext, useState } from 'react';
 import Help from './components/Help';
 import SignIn from './LoginRelated/SignIn';
 import SignUp from './LoginRelated/SignUp';
+import HeaderV2 from './components/HeaderV2';
 // import WithSubnavigation from './components/NavbarDefault'
 
 export const Context = createContext()
@@ -18,7 +19,8 @@ function App() {
     <Router>
       
       <Context.Provider value={{ userDetails, setUserDetails, loginState, setLoginState }}>
-        <Header />
+        {/* <Header /> */}
+        <HeaderV2/>
         
         {/* <WithSubnavigation/> */}
         {/* <App */}
