@@ -75,7 +75,6 @@ const UserProfile = () => {
   };
   
   if (loginState === undefined) return <ProfileShimmer />;
-  console.log(loginState)
   return !loginState ? <SignInPrompt /> : (
     <div className="min-h-screen  p-6 flex items-center justify-center flex-col max-lg:p-3 ">
       <div className="max-w-3xl w-full  text-gray-100 rounded-2xl shadow-2xl p-8 md:p-10 max-md:p-3">

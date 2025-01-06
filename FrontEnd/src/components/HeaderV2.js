@@ -8,7 +8,6 @@ export default function HeaderV2() {
   const { setUserDetails, setLoginState } = useContext(Context);
   const [headerState, setHeaderState] = useState(false);
   const navigate = useNavigate();
-console.log(BackEndPort)
   async function authenticateUser() {
     try {
       const response = await fetch(`${BackEndPort}/auth`, {

@@ -20,6 +20,7 @@ import ForgotPassword from './ForgotPassword';
 import { BackEndPort } from '../import';
 import { toast } from 'react-toastify';
 import { Context } from '../App';
+import { FaSpinner } from 'react-icons/fa';
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -70,6 +71,7 @@ const SignIn = (props) => {
   const [open, setOpen] = React.useState(false);
   const [password, setPassword] = React.useState('')
   const [email, setEmail] = React.useState('')
+  const [loading , setLoading] = React.useState(false)
   const { loginState, userDetails, setLoginState, setUserDetails } = React.useContext(Context);
   const navigate = useNavigate()
 
@@ -93,6 +95,7 @@ const SignIn = (props) => {
       toast.error("Please fix the errors before submitting.");
       return;
     }
+    setLoading(true)
     const signIn = await fetch(`${BackEndPort}/SignIn`, {
       method: 'POST',
       credentials: 'include',
@@ -109,7 +112,7 @@ const SignIn = (props) => {
     } else {
       toast.error(response.message);
     }
-
+    setLoading(false);
   };
 
   const validateInputs = () => {
@@ -237,7 +240,7 @@ const SignIn = (props) => {
               variant="contained"
               onClick={validateInputs}
             >
-              Sign in
+             { loading ?  <FaSpinner className="spinner !h-7 !w-7" /> : ' Sign in'}
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
               Don&apos;t have an account?{' '}
@@ -247,7 +250,7 @@ const SignIn = (props) => {
                   variant="body2"
                   sx={{ alignSelf: 'center' }}
                 >
-                  Sign up
+                Sign up
                 </DOMLink>
               </span>
             </Typography>

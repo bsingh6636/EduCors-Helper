@@ -35,7 +35,7 @@ const SignInAndSignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true); // Start spinner
+        setLoading(true); 
         let hasErrors = false;
 
         setErrors({
@@ -87,12 +87,12 @@ const SignInAndSignUp = () => {
         }
 
         if (hasErrors) {
-            setLoading(false);
             return;
         }
 
         try {
-            if (isSignUp) {
+        setLoading(true); 
+        if (isSignUp) {
                 const signUp = await fetch(`${BackEndPort}/signUp`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -176,6 +176,7 @@ const SignInAndSignUp = () => {
                             error={errors.UserNameorEmail}
                         />
                     )}
+                    {console.log('test')}
                     <InputField
                         label="Password"
                         type="password"
@@ -183,7 +184,6 @@ const SignInAndSignUp = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         error={errors.Password}
                     />
-
                     <button
                         type="submit"
                         className="auth-button primary-button"
