@@ -25,7 +25,7 @@ function App() {
         {/* <WithSubnavigation/> */}
         {/* <App */}
         {/* <NavbarDefault/> */}
-        <div className="font-mono max-sm:mx-2 max-sm:text-sm max-lg:mx-20 max-xl:mx-32 max-2xl:mx-40 2xl:mx-40" >
+        <div className="font-mono text-base max-sm:mx-2 max-sm:text-sm max-lg:mx-20 max-xl:mx-32 max-2xl:mx-40 2xl:mx-40" >
           {/* content bg-gradient-to-r from-black via-gray-800 to-black */}
           <Routes>
             <Route path="/" element={<Home />} />

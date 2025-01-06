@@ -10,18 +10,18 @@ const Home = () => {
     <>
       <div className='flex justify-center flex-col'>
         <div className='flex justify-center'>
-          <p className='mt-20 border-2 p-1 px-2 rounded-2xl  border-white max-sm:mt-2'>Now: Effotless soltutions for devvelopers |
-            <span className='text-blue-700 max-sm:flex max-sm:justify-center'>Learn more</span>
+          <p className='border-2 p-1  rounded-xl border-white'>Effotless soltutions for cors 
+            {/* <span className='text-blue-700 max-sm:flex max-sm:justify-center'>Learn more</span> */}
           </p>
         </div>
-        <div className='flex flex-col text-5xl font-extrabold items-center mt-5 text max-sm:text-3xl '>
-          <span>𝕆𝕡𝕥𝕚𝕞𝕚𝕫𝕖 𝕐𝕠𝕦𝕣 𝔸ℙ𝕀</span>
-          <span>𝔻𝕖𝕧𝕖𝕝𝕠𝕡𝕞𝕖𝕟𝕥</span>
+        <div className='flex flex-col text-3xl font-extrabold justify-center items-center md:mt-5 text max-sm:text-xl '>
+          <span>𝕆𝕡𝕥𝕚𝕞𝕚𝕫𝕖 𝕐𝕠𝕦𝕣 𝔸ℙ𝕀 𝔻𝕖𝕧𝕖𝕝𝕠𝕡𝕞𝕖𝕟𝕥</span>
+          {/* <span>𝔻𝕖𝕧𝕖𝕝𝕠𝕡𝕞𝕖𝕟𝕥</span> */}
         </div>
-        <div className=' items-center text-xl flex-col max-sm:text-base flex max-sm:flex-none sm:flex '>
+        <div className=' items-center flex-col flex justify-center max-sm:flex-none sm:flex max-md:text-base '>
         
-          <span>Resolve CORS issues seamlessly with our secure API Keys. Focus on building</span>
-          <span>great Application without hassle</span>
+          <span>Resolve CORS issues seamlessly with our secure API Keys. Focus on building great Application without hassle</span>
+          {/* <span></span> */}
           <Hover/>
           <Home2 />
           <Home3 />
@@ -42,10 +42,10 @@ const Home2 = () => {
     <div className='mt-10 flex flex-row max-md:flex-col max-lg:w-96'>
     <div className='flex-1 md:w-1/2 md:mr-5'>
       <p className='text-blue-700 mb-5 text-base sm:text-lg md:text-xl'>Seamless API Integration</p>
-      <h1 className='font-extrabold text-2xl max-lg:text-xl  lg:text-5xl '>
+      <h1 className='font-extrabold text-2xl max-lg:text-xl  lg:text-lg '>
         Unlock your application potential
       </h1>
-      <p className='mt-5 md:mt-9 text-sm sm:text-base lg:text-lg'>
+      <p className='mt-5 md:mt-9 text-sm'>
         Effortlessly resolve CORS issues and streamline your development process if u r having  request blocked CORS policy:  No 'Access-Control-Allow-Origin'
       </p>
       <div className='flex flex-col md:flex-row mt-5 md:mt-10'>
@@ -56,9 +56,9 @@ const Home2 = () => {
           <FaBoltLightning className='mt-3'/>
         </div>
         <div className='w-'>
-          <p className='text-xs  lg:text-lg'><strong>Instant CORS Resolution:</strong> Transform complex integration into smooth API interaction</p>
-          <p className='text-xs lg:text-lg'><strong>Secure API Keys:</strong> Protect your data with tailored user-specific keys.</p>
-          <p className='text-xs lg:text-lg'><strong>Quick Setup:</strong> Get started swiftly without any hassle</p>
+          <p className=''><strong>Instant CORS Resolution:</strong> Transform complex integration into smooth API interaction</p>
+          <p className=''><strong>Secure API Keys:</strong> Protect your data with tailored user-specific keys.</p>
+          <p className=''><strong>Quick Setup:</strong> Get started swiftly without any hassle</p>
         </div>
       </div>
     </div>
@@ -160,21 +160,11 @@ const Home4 = () => {
 };
 
 
-
-
-
-
-
 const Homee = () => {
   return (
     <div className="max-w-7xl mx-auto p-6 flex flex-col space-y-8">
      
       <div className="bg-gradient-dark p-6 rounded-lg shadow-lg hover-scale relative overflow-hidden">
-        <img
-          src="/images/support-bg.svg"
-          alt="Background"
-          className="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"
-        />
         <h2 className="text-3xl font-semibold text-gray-100 mb-4 z-10 relative">
           Support & Resources
         </h2>
@@ -183,13 +173,8 @@ const Homee = () => {
         </p>
         <ul className="list-disc list-inside text-gray-300 leading-relaxed space-y-2 z-10 relative">
           <li>
-            {/* <a href="/documentation" className="text-gray-100 hover:text-gray-400 hover:underline"> */}
     <Link to='/documentation' className='text-gray-100 hover:text-gray-400'> API Documentation </Link>
-          </li>
-          <li>
-            {/* <a href="/support" className="text-gray-100 hover:text-gray-400 hover:underline" onClick={}>
-              Contact Support
-            </a> */}
+         
           </li>
         </ul>
       </div>

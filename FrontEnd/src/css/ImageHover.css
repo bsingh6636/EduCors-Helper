@@ -15,3 +15,11 @@
 .card:hover {
   box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.4);
 }
+
+/* @media screen and (max-width: 600px) { */
+@media screen and (max-width : 600px){
+  .card{
+    width: 35ch;
+    height: 35ch;
+  }
+}
