@@ -5,7 +5,7 @@
 SecureAPI Bypass is a full-stack application that helps users fetch data securely from different APIs while bypassing CORS issues. It leverages JWT-based authentication and allows users to generate API keys after signing up on the platform.
 
 **Hosted URL**  
-[https://educorssolver.host](https://educorssolver.host)
+[https://cors-proxy.brijeshdev.space](https://cors-proxy.brijeshdev.space)
 
 **Features**
 - Secure sign-in and authentication using JWT.
