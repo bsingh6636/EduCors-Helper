@@ -5,7 +5,7 @@ import { config } from 'dotenv'
 
 config({ path: './config.env' })
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 9292
 mongoose.connect(process.env.MONGO_SRV, {
     dbname: 'proxy'
 }).then(() => {
