@@ -16,5 +16,9 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use(express.json());
+app.use('/api/getData/health', (req, res) => {
+    res.status(200).json({ status: 'success' });
+})
 app.use('/api/getData', VerifyApiKey, forwardUrl);
+
 export default app;
