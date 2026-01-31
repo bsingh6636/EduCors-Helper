@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use('/api/health', (req, res) => {
-    res.json({ message: 'Server is running' });
+    res.status(200).json({ status: 'success' });
 })
 app.use('/api', userRouter);
 
