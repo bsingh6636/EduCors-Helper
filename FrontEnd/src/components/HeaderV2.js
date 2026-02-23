@@ -10,7 +10,7 @@ export default function HeaderV2() {
   const navigate = useNavigate();
   async function authenticateUser() {
     try {
-      const response = await fetch(`${BackEndPort}/auth`, {
+      const response = await fetch(`/api/auth`, {
         credentials: 'include',
       });
       const data = await response.json();
@@ -22,6 +22,21 @@ export default function HeaderV2() {
       }
     } catch (error) {
       console.error(error);
+      console.log('trying again')
+      try {
+        const response = await fetch(`${BackEndPort}/auth`, {
+          credentials: 'include',
+        });
+        const data = await response.json();
+        if (data.success) {
+          setLoginState(true);
+          setUserDetails(data.data);
+        } else {
+          setLoginState(false);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
