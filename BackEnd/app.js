@@ -20,6 +20,10 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
+app.use('/health', (req, res) => {
+    res.status(200).json({ status: 'success' });
+})
+
 app.use('/api/health', (req, res) => {
     res.status(200).json({ status: 'success' });
 })

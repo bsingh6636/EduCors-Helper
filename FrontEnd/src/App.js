@@ -15,13 +15,46 @@ export const Context = createContext()
 function App() {
   const [userDetails, setUserDetails] = useState()
   const [loginState, setLoginState] = useState()
+
+  React.useEffect(() => {
+    const checkHealth = async () => {
+      try {
+        let response = await fetch('/api/health', {
+          credentials: 'include',
+        });
+
+        // fallback if first fails
+        if (!response.ok) {
+          response = await fetch('/health');
+        }
+
+        // check HTTP status
+        if (response.status === 200) {
+          const data = await response.json();
+          console.log("Response:", data);
+
+          if (data.success) {
+            setUserDetails(data.data);
+            setLoginState(true);
+          }
+        } else {
+          console.log("Non-200 status:", response.status);
+        }
+
+      } catch (error) {
+        console.error("Fetch error:", error);
+      }
+    };
+
+    checkHealth();
+  }, []);
   return (
     <Router>
-      
+
       <Context.Provider value={{ userDetails, setUserDetails, loginState, setLoginState }}>
         {/* <Header /> */}
-        <HeaderV2/>
-        
+        <HeaderV2 />
+
         {/* <WithSubnavigation/> */}
         {/* <App */}
         {/* <NavbarDefault/> */}
