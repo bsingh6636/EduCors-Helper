@@ -4,7 +4,7 @@ import './App.css';
 import { Home, Error, Header, UserProfile, Footer, Docs } from './import'; // Make sure Error404 is the correct component name
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import BrowserRouter as Router
 import "react-toastify/dist/ReactToastify.css";
-import { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import Help from './components/Help';
 import SignIn from './LoginRelated/SignIn';
 import SignUp from './LoginRelated/SignUp';
