@@ -71,15 +71,15 @@ const SignIn = (props) => {
   const [open, setOpen] = React.useState(false);
   const [password, setPassword] = React.useState('')
   const [email, setEmail] = React.useState('')
-  const [loading , setLoading] = React.useState(false)
+  const [loading, setLoading] = React.useState(false)
   const { loginState, userDetails, setLoginState, setUserDetails } = React.useContext(Context);
   const navigate = useNavigate()
 
-  React.useEffect(()=>{
-    if(loginState == true){
-        navigate('/profile')
+  React.useEffect(() => {
+    if (loginState == true) {
+      navigate('/profile')
     }
-},[])
+  }, [])
 
   // const handleClickOpen = () => {
   //   setOpen(true);
@@ -240,17 +240,17 @@ const SignIn = (props) => {
               variant="contained"
               onClick={validateInputs}
             >
-             { loading ?  <FaSpinner className="spinner !h-7 !w-7" /> : ' Sign in'}
+              {loading ? <FaSpinner className="spinner !h-7 !w-7" /> : ' Sign in'}
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
-              Don&apos;t have an account?{' '}
+              Don&apos;t have an account? Then{' '}
               <span>
                 <DOMLink
                   to="/signUp"
                   variant="body2"
                   sx={{ alignSelf: 'center' }}
                 >
-                Sign up
+                  Sign up
                 </DOMLink>
               </span>
             </Typography>

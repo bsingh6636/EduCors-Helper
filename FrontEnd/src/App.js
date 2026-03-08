@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 // Lazy load components from ./import
 const Home = lazy(() => import('./import').then(module => ({ default: module.Home })));
 const Error = lazy(() => import('./import').then(module => ({ default: module.Error })));
-const Header = lazy(() => import('./import').then(module => ({ default: module.Header })));
+// const Header = lazy(() => import('./import').then(module => ({ default: module.Header })));
 const UserProfile = lazy(() => import('./import').then(module => ({ default: module.UserProfile })));
 const Footer = lazy(() => import('./import').then(module => ({ default: module.Footer })));
 const Docs = lazy(() => import('./import').then(module => ({ default: module.Docs })));
