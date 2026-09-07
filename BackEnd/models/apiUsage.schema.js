@@ -1,32 +1,27 @@
 import mongoose from 'mongoose';
 
-const endpointRecordSchema = new mongoose.Schema({
-    endpoint: { type: String, required: true },
-    calls: { type: Number, default: 1 },
-});
-
-const dailyRecordSchema = new mongoose.Schema({
-    date: { type: String, required: true },
-    calls: { type: Number, default: 1 },
-    endpointRecord: [endpointRecordSchema], // Corrected schema reference
-});
-
-const apiUsageSchema = new mongoose.Schema({
+const schema = new mongoose.Schema(
+  {
     UserName: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+      unique: true,
     },
-    totalApiCalls: { type: Number, default: 1 },
-    usageRecords: [
-        {
-            month: { type: String, required: true },
-            totalEndpointCalls: { type: Number, default: 1 },
-            dailyRecord: [dailyRecordSchema], // Corrected schema reference
-        }
+    totalApiCalls: { type: Number, default: 0 },
+    dailyCounts: { type: Map, of: Number, default: {} },
+    // Retained so existing accounts can still read their historical activity.
+    usageRecords: { type: Array, default: [] },
+    recentLogs: [
+      {
+        endpoint: String,
+        method: String,
+        statusCode: Number,
+        latencyMs: Number,
+        timestamp: { type: Date, default: Date.now },
+      },
     ],
-});
-
-const ApiUsage = mongoose.model('ApiUsage', apiUsageSchema);
-export default ApiUsage;
-
+  },
+  { timestamps: true },
+);
+export default mongoose.models.ApiUsage || mongoose.model('ApiUsage', schema);
