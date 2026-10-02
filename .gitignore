@@ -1,0 +1,13 @@
+**/node_modules/
+**/build/
+**/dist/
+**/coverage/
+**/.env
+**/.env.*
+!**/.env.example
+**/config.env
+**/.DS_Store
+*.log
+.playwright/
+
+.local/
