@@ -1,0 +1,38 @@
+name: Verify EduCors
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo:8
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand({ping:1}).ok' --quiet"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: |
+            BackEnd/package-lock.json
+            FrontEnd/package-lock.json
+      - name: Install dependencies
+        run: npm run setup
+      - name: Test account and gateway behavior
+        run: npm test
+        env:
+          EDUCORS_TEST_MONGO_URI: mongodb://127.0.0.1:27017/educors_test
+      - name: Build the web interface
+        run: npm run build
