@@ -1,12 +1,19 @@
 {
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "rewrites": [
     {
       "source": "/api/getData",
       "destination": "https://api-service-prod3.vercel.app/api/getData"
     },
     {
-      "source": "/api/(.*)",
-      "destination": "https://api-service-for-web.vercel.app/api/$1"
+      "source": "/api/:path*",
+      "destination": "https://api-service-for-web.vercel.app/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }

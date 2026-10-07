@@ -1,0 +1,17 @@
+{
+  "name": "educors-helper",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "setup": "npm ci --prefix BackEnd && npm ci --prefix FrontEnd",
+    "dev": "node scripts/dev.mjs",
+    "dev:api": "npm run dev --prefix BackEnd",
+    "dev:web": "npm run dev --prefix FrontEnd",
+    "build": "npm run build --prefix FrontEnd",
+    "test": "npm test --prefix FrontEnd && npm test --prefix BackEnd"
+  }
+}

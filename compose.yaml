@@ -1,0 +1,31 @@
+services:
+  mongo:
+    image: mongo:8
+    volumes:
+      - educors-data:/data/db
+    healthcheck:
+      test:
+        ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  api:
+    build: ./BackEnd
+    environment:
+      NODE_ENV: development
+      LISTEN_HOST: 0.0.0.0
+      MONGO_SRV: mongodb://mongo:27017/educors
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:?Set JWT_SECRET_KEY to a random secret of at least 32 characters}
+      FRONTEND_URL: http://localhost:5173
+      TRUST_PROXY: "1"
+    depends_on:
+      mongo:
+        condition: service_healthy
+  web:
+    build: ./FrontEnd
+    ports:
+      - "127.0.0.1:5173:80"
+    depends_on:
+      - api
+volumes:
+  educors-data:

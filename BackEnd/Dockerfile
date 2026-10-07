@@ -1,16 +1,9 @@
-FROM node:18-alpine
-
-WORKDIR /usr/src/app
-
-# Copy package.json and package-lock.json to install dependencies
+FROM node:24-alpine
+ENV NODE_ENV=production LISTEN_HOST=0.0.0.0
+WORKDIR /app
 COPY package*.json ./
-RUN npm install
-
-# Copy the rest of the application code
+RUN npm ci --omit=dev
 COPY . .
-
-# Expose the port your app listens on
+USER node
 EXPOSE 9090
-
-# Command to run the application
-CMD ["npm", "start"]
+CMD ["node", "index.js"]

@@ -1,116 +1,101 @@
-import bcrypt from 'bcrypt'
-import User from "../models/user.model.js"
-import { asyncErrorHandler } from "../utils/asyncErrorHandler.js";
-import jwt from 'jsonwebtoken'
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { randomBytes } from 'node:crypto';
+import User from '../models/user.model.js';
 import { deletePartobject } from '../helper/deletePartobject.js';
-import crypto from 'crypto'
+import { validateSignup } from '../helper/validateInput.js';
+import { cookieOptions, SESSION_DAYS, getJwtSecret } from '../envHelper.js';
 
-
-export const userSign = asyncErrorHandler(async (req, res) => {
-    let { UserNameorEmail, Password } = req.body;
-    UserNameorEmail = UserNameorEmail.toLowerCase()
-
-    try {
-        let user = await User.findOne({
-            $or: [
-                { UserName: UserNameorEmail },
-                { Email: UserNameorEmail }
-            ]
-        });
-
-        if (!user) return res.status(400).json({ success: false, message: "User not found, try signing up." });
-
-
-        const checkPassword = await bcrypt.compare(Password, user.Password)
-        if (!checkPassword) return res.status(400).json({ success: false, message: "Incorrect Password try again." });
-        const payload = { id: user.id }
-        user = deletePartobject(user)
-        const expiresIn = parseInt(process.env.COOKIE_EXPIRES, 10) * 24 * 60 * 60;
-
-        // Generate token
-        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn });
-
-        res.cookie('userToken', token, { httpOnly: true, secure: true, sameSite: 'strict' })
-        return res.status(200).json({ success: 'true', message: "Logging In", data: user })
-    } catch (error) {
-        console.error(error)
-        return res.status(400).json({ success: false, message: "Failed try again" });
-    }
-})
-
-export const userSignUp = asyncErrorHandler(async (req, res) => {
-    let { UserName, Password, Name, Email, Country } = req.body;
-    console.log(Email, Name, Password)
-    if (!Password || !Name || !Email) {
-        return res.status(400).json({ success: false, message: "All fields are required." });
-    }
-    try {
-        // Check if user already exists
-        const existingUser = await User.findOne({ Email });
-
-        if (existingUser) {
-            return res.status(400).json({ success: false, message: "User already exists with this Email " });
-        }
-
-
-        let user = await User.create({
-           UserName ,  Password, Name, Email, Country
-        })
-        const payload = { id: user.id }
-        user = deletePartobject(user)
-        const expiresIn = parseInt(process.env.COOKIE_EXPIRES, 10) * 24 * 60 * 60;
-
-        // Generate token
-        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn });
-
-        res.cookie('userToken', token, { httpOnly: true, secure: true, sameSite: 'strict' })
-
-        user = deletePartobject(user)
-        return res.status(201).json({ success: true, message: "User created successfully", data: user , token :token });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ success: false, message: error.message, error });
-    }
-});
-
-export const userLogOut = asyncErrorHandler(async (req, res, next) => {
-    try {
-        res.clearCookie('userToken')
-        return res.status(200).json({ success: true, message: 'Logged out Sucessfully' })
-    } catch (error) {
-        return res.status(400).json({ success: false, message: 'Logged out failed', error })
-    }
-})
-
-export const generateApiKey = asyncErrorHandler(async (req, res, next) => {
-    const { UserName } = req.body;
-    console.log(UserName)
-
-    if (!UserName) return res.status(400).json({ success: false, error: 'userName is required' });
-
-
-    try {
-        const user = await User.findOne({ UserName });
-        if (!user) return res.status(404).json({ success: false, error: 'User not found' });
-
-        if (user.ApiKey) {
-            return res.json({ success: true, message: 'API key already exists', data: user.ApiKey });
-        }
-
-        const ApiKey = crypto.randomBytes(8).toString('hex');
-
-        const updatedUser = await User.findOneAndUpdate(
-            { UserName },
-            { ApiKey },
-            { new: true, runValidators: true }
-        );
-
-        return res.json({ success: true, message: 'Api Key Generated', data: updatedUser.ApiKey });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ success: false, message: 'Failed to generate API key' });
-    }
-});
-
-
-
+const newKey = () => 'ec_' + randomBytes(24).toString('hex');
+export const API_KEY_PATTERN = /^ec_[a-f0-9]{48}$/;
+// A cost-12 hash of a random value, compared for unknown users so sign-in time doesn't reveal which accounts exist.
+const TIMING_HASH =
+  '$2b$12$U.dcaOHgE/Egn7XsP2XuWeyfpBAZzLgcZstHbq09xy8HJSXGVCRki';
+function startSession(res, user, status = 200) {
+  const token = jwt.sign({ id: String(user._id) }, getJwtSecret(), {
+    expiresIn: SESSION_DAYS + 'd',
+    algorithm: 'HS256',
+  });
+  res.cookie('userToken', token, {
+    ...cookieOptions,
+    maxAge: SESSION_DAYS * 86400000,
+  });
+  return res
+    .status(status)
+    .json({ success: true, data: deletePartobject(user) });
+}
+export async function userSign(req, res) {
+  const { UserNameorEmail, Password } = req.body || {};
+  if (
+    typeof UserNameorEmail !== 'string' ||
+    typeof Password !== 'string' ||
+    !UserNameorEmail.trim() ||
+    !Password
+  ) {
+    return res.status(400).json({
+      success: false,
+      message: 'Username or email and password are required.',
+    });
+  }
+  const input = UserNameorEmail.trim().toLowerCase();
+  const user = await User.findOne({
+    $or: [{ UserName: input }, { Email: input }],
+  }).select('+Password');
+  const matches = await bcrypt.compare(
+    Password,
+    user?.Password || TIMING_HASH,
+  );
+  if (!user || !matches) {
+    return res.status(401).json({
+      success: false,
+      message: 'The username/email or password is incorrect.',
+    });
+  }
+  return startSession(res, user);
+}
+export async function userSignUp(req, res) {
+  const error = validateSignup(req.body);
+  if (error) return res.status(400).json({ success: false, message: error });
+  getJwtSecret();
+  const { UserName, Name, Email, Password, Country } = req.body;
+  try {
+    const user = await User.create({
+      UserName: UserName.trim().toLowerCase(),
+      Name: Name.trim(),
+      Email: Email.trim().toLowerCase(),
+      Password,
+      Country: Country?.trim() || '',
+      ApiKey: newKey(),
+    });
+    return startSession(res, user, 201);
+  } catch (error) {
+    if (error.code === 11000)
+      return res.status(409).json({
+        success: false,
+        message: 'That username or email is already in use.',
+      });
+    throw error;
+  }
+}
+export function userLogOut(req, res) {
+  res.clearCookie('userToken', cookieOptions);
+  return res.json({ success: true });
+}
+export async function regenerateApiKey(req, res) {
+  const key = newKey();
+  await User.updateOne({ _id: req.user._id }, { $set: { ApiKey: key } });
+  return res.json({ success: true, data: key });
+}
+export async function validateApiKey(req, res) {
+  const key = req.get('x-api-key');
+  if (!key)
+    return res
+      .status(400)
+      .json({ success: false, valid: false, message: 'API key is required.' });
+  const user =
+    API_KEY_PATTERN.test(key) &&
+    (await User.findOne({ ApiKey: key }).select('_id'));
+  return res
+    .status(user ? 200 : 401)
+    .json({ success: Boolean(user), valid: Boolean(user) });
+}
